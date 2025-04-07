@@ -35,17 +35,17 @@ const userSeeder = {
             role_id     : UsersRoleEnum.Admin,
             name        : 'Kiry',
             avatar      : 'static/ecommerce/user/avatar.png',
-            email       : 'yimklok.kh@gmail.com',
-            phone       : '0977779688',
+            email       : 'kiry.kh@gmail.com',
+            phone       : '012345678',
             password    : '123456',
             is_active   : UsersActiveEnum.Active
         },
         {
             role_id     : UsersRoleEnum.User,
-            name        : 'Heng MeyMey',
+            name        : 'Satya',
             avatar      : 'static/ecommerce/user/avatar.png',
-            email       : 'hengmeymey@gmail.com',
-            phone       : '0979688777',
+            email       : 'satya@gmail.com',
+            phone       : '012121212',
             password    : '123456',
             is_active   : UsersActiveEnum.Active
         }

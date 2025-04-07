@@ -15,9 +15,5 @@ export class AuthController {
     async login(@Body() data: LoginRequestDto): Promise<{ access_token: string, expires_in: string, user: UserDto }> {
         return await this.authService.login(data);
     }
-
-    @Post('sign-up')
-    async signup(@Body() data: SignUpDto): Promise<{ access_token: string, expires_in: string, user: UserDto }> {
-        return await this.authService.signup(data);
-    }
+    
 }
