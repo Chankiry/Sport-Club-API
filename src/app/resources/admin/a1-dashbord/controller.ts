@@ -18,4 +18,9 @@ export class AdminDashboardController {
         return await this._service.getData();
     }
 
+    @Get('data')
+    async getData1() {
+        return await this._service.getData111();
+    }
+
 }

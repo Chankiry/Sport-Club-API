@@ -5,7 +5,6 @@ import { Controller, Get, Query } from '@nestjs/common';
 
 // ===========================================================================>> Custom Library
 import { AdminPaymentService } from './service';
-import { AdminPaymentDataSetup, ResponseGetReport } from './interface';
 
 @Controller()
 export class AdminPaymentController {

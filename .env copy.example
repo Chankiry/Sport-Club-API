@@ -1,10 +1,10 @@
 # MySQL & Postgres
 DB_CONNECTION= postgres
 DB_HOST= 127.0.0.1
-DB_PORT= 8001
+DB_PORT= 8005
 DB_USERNAME= postgres
 DB_PASSWORD= pw@2024
-DB_DATABASE= ecommerce
+DB_DATABASE= sport-club
 
 
 #FILE SERVICE
@@ -13,5 +13,4 @@ FILE_BASE_URL       = http://localhost:8080
 # FILE_USERNAME       = ${FILE_USERNAME}
 # FILE_PASSWORD       = ${FILE_PASSWORD}
 
-#JSONWEBTOKEN
 JWT_SECRET          = ${JWT_SECRET:null}

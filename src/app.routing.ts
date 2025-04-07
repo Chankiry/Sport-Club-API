@@ -5,6 +5,7 @@ import { Routes } from '@nestjs/core';
 // Account
 import { AuthModule } from './app/resources/account/auth/auth.module';
 import { AdminModule } from './app/resources/admin/admin.module';
+import { adminRoutes } from './app/resources/admin/admin.routes';
 
 export const appRoutes: Routes = [{
     path: 'api',
@@ -15,7 +16,7 @@ export const appRoutes: Routes = [{
         },
         {
             path: 'admin',
-            module: AdminModule
+            children: adminRoutes
         }
     ]
 }];
