@@ -12,6 +12,12 @@ class Sports extends Model<Sports> {
     @Column({ allowNull: false, type: DataType.STRING(100) })
     name: string;
 
+    @Column({ allowNull: false, type: DataType.DATE })
+    created_at: Date;
+
+    @Column({ allowNull: false, type: DataType.DATE })
+    updated_at: Date;
+
 }
 
 export default Sports;
