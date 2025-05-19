@@ -1,7 +1,7 @@
 // ================================================================>> Third Party Library
 import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Booking from '../booking/bookings.model';
-import SponsorPitch from '../sponsor/sponsor_pitches.model';
+import SponsorPitch from '../sponsor/sponsors_sports.model';
 import Drink from './drinks.model';
 import Payment from '../payment/payment.model';
 
