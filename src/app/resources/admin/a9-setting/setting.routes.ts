@@ -8,7 +8,6 @@ import { AdminPitchCategoryModule } from './s3-pitch-category/module';
 import { AdminSportModule } from './s4-sport/module';
 import { AdminDateTypeModule } from './s5-date-type/module';
 import { AdminTimeTypeModule } from './s6-time-type/module';
-import { AdminTeamGradeModule } from './s7-team-grade/module';
 
 
 export const adminSettingRoutes: Routes = [
@@ -35,9 +34,5 @@ export const adminSettingRoutes: Routes = [
     {
         path: 'time-types',
         module: AdminTimeTypeModule
-    },
-    {
-        path: 'team-grades',
-        module: AdminTeamGradeModule
     },
 ];

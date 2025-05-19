@@ -12,13 +12,13 @@ import { AdminSportTeamModule } from './a9-sport-team/module';
 import { AdminBookingModule } from './a3-booking/module';
 
 // Setting
-import { AdminBlackListModule } from './a10-setting/s1-blacklist/module';
-import { AdminPitchModule } from './a10-setting/s2-pitch/module';
-import { AdminPitchCategoryModule } from './a10-setting/s3-pitch-category/module';
-import { AdminSportModule } from './a10-setting/s4-sport/module';
-import { AdminDateTypeModule } from './a10-setting/s5-date-type/module';
-import { AdminTimeTypeModule } from './a10-setting/s6-time-type/module';
-import { AdminTeamGradeModule } from './a10-setting/s7-team-grade/module';
+import { AdminBlackListModule } from './a9-setting/s1-blacklist/module';
+import { AdminPitchModule } from './a9-setting/s2-pitch/module';
+import { AdminPitchCategoryModule } from './a9-setting/s3-pitch-category/module';
+import { AdminSportModule } from './a9-setting/s4-sport/module';
+import { AdminDateTypeModule } from './a9-setting/s5-date-type/module';
+import { AdminTimeTypeModule } from './a9-setting/s6-time-type/module';
+import { AdminTeamGradeModule } from './a9-setting/s7-team-grade/module';
 
 @Module({
     imports: [

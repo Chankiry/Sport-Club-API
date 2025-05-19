@@ -11,7 +11,7 @@ import { AdminUserModule } from './a7-users/module';
 import { AdminSponsorModule } from './a8-sponsor/module';
 import { AdminSportTeamModule } from './a9-sport-team/module';
 import { AdminBookingModule } from './a3-booking/module';
-import { adminSettingRoutes } from './a10-setting/setting.routes';
+import { adminSettingRoutes } from './a9-setting/setting.routes';
 
 // ===>> Module
 

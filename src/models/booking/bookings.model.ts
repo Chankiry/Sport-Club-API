@@ -6,9 +6,7 @@ import User from '../user/user.model';
 import Pitches from '../pitch/pitches.model';
 import DatesType from '../pitch/dates_type.model';
 import TimesType from '../pitch/times_type.model';
-import SportTeams from '../sport/sport_teams.model';
 import BookingStatus from './booking_status.model';
-import TeamsGrade from '../sport/team_grades.model';
 import Payment from '../payment/payment.model';
  
 
@@ -56,20 +54,10 @@ class Booking extends Model<Booking> {
     @Column({ allowNull: false, type: DataType.BOOLEAN })
     needed_match: boolean;
 
-    // Foreign Key for SportTeam model (sport_team_id remains optional)
-    @ForeignKey(() => SportTeams)
-    @Column({ allowNull: true, type: DataType.INTEGER })
-    sport_team_id: number;
-
     // Foreign Key for BookingStatus model
     @ForeignKey(() => BookingStatus)
     @Column({ allowNull: true, type: DataType.INTEGER })
     booking_status_id: number;
-
-    // Foreign Key for TeamGrade model (match_grade_id is now team_grade_id)
-    @ForeignKey(() => TeamsGrade)
-    @Column({ allowNull: true, type: DataType.INTEGER })
-    team_grade_id: number;
 
     @Column({ allowNull: false, type: DataType.STRING(255) })
     price: string;
@@ -93,14 +81,8 @@ class Booking extends Model<Booking> {
     @BelongsTo(() => TimesType)
     time_type: TimesType;
 
-    @BelongsTo(() => SportTeams)
-    sport_team: SportTeams;
-
     @BelongsTo(() => BookingStatus)
     booking_status: BookingStatus;
-
-    @BelongsTo(() => TeamsGrade)
-    team_grade: TeamsGrade;
 
     // 1 to 0..1 relationship with Payment
     @HasOne(() => Payment)

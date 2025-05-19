@@ -5,7 +5,14 @@ import { Sequelize } from 'sequelize-typescript';
 
 // ================================================================>> Costom Library
 import sequelizeConfig from '../../config/sequelize.config';
-import { UserSeeder } from './user.seeder';
+import { UserSeeder } from './user/user.seeder';
+import { BookingSeeder } from "./booking/booking.seeder";
+import { DrinkSeeder } from "./drink/drink.seeder";
+import { EquimentSeeder } from "./equiment/equiment.seeder";
+import { PaymentSeeder } from "./payment/payment.seeder";
+import { PitchSeeder } from "./pitch/pitch.seeder";
+import { SponsorSeeder } from "./sponsor/sponsor.seeder";
+import { SportSeeder } from "./sport/sport.seeder";
 
 async function seeds() {
     const sequelize = new Sequelize(sequelizeConfig);
@@ -30,12 +37,38 @@ async function seeds() {
         /** @seedUser ======================================= */
         const userSeeder = new UserSeeder();
         await userSeeder.seed();
+        
+        /** @seedSport ======================================= */
+        const sportSeeder = new SportSeeder();
+        await sportSeeder.seed();
+        
+        /** @seedPitch ======================================= */
+        const pitchSeeder = new PitchSeeder();
+        await pitchSeeder.seed();
+        
+        /** @seedSponsor ======================================= */
+        const sponsorSeeder = new SponsorSeeder();
+        await sponsorSeeder.seed();
+        
+        /** @seedBooking ======================================= */
+        const bookingSeeder = new BookingSeeder();
+        await bookingSeeder.seed();
+        
+        /** @seedDrink ======================================= */
+        const drinkSeeder = new DrinkSeeder();
+        await drinkSeeder.seed();
 
-
-
+        /** @seedPayment ======================================= */
+        const paymentSeeder = new PaymentSeeder();
+        await paymentSeeder.seed();
+        
+        /** @seedEquiment ======================================= */
+        const equimentSeeder = new EquimentSeeder();
+        await equimentSeeder.seed();
+        
         // End of execution
         process.exit(0);
-
+        
     } catch (error) {
         // Delete all if have a errors
         await sequelize.sync({ force: true });

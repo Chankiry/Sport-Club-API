@@ -8,7 +8,7 @@ import Payment from '../payment/payment.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'sponsors_pitch', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'sponsors_sports', createdAt: 'created_at', updatedAt: 'updated_at' })
 class SponsorPitch extends Model<SponsorPitch> {
 
     @Column({ primaryKey: true, autoIncrement: true })

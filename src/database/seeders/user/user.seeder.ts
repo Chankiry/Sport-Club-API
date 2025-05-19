@@ -1,8 +1,8 @@
 
-import { UsersActiveEnum }  from "../../app/enums/user/active.enum";
-import { UsersRoleEnum }    from "../../app/enums/user/type.enum";
-import UsersRole            from "../../models/user/role.model";
-import User                 from "../../models/user/user.model";
+import { UsersActiveEnum }  from "../../../app/enums/user/active.enum";
+import { UsersRoleEnum }    from "../../../app/enums/user/type.enum";
+import UsersRole            from "../../../models/user/role.model";
+import User                 from "../../../models/user/user.model";
 
 
 export class UserSeeder {
