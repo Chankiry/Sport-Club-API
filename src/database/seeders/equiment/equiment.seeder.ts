@@ -1,10 +1,7 @@
-export class EquimentSeeder {
-
+export class EquipmentSeeder  {
     seed = async () => {
-
     }
 }
 
-const data = {
-
+const equipmentData = {
 };

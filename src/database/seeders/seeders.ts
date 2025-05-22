@@ -8,7 +8,7 @@ import sequelizeConfig from '../../config/sequelize.config';
 import { UserSeeder } from './user/user.seeder';
 import { BookingSeeder } from "./booking/booking.seeder";
 import { DrinkSeeder } from "./drink/drink.seeder";
-import { EquimentSeeder } from "./equiment/equiment.seeder";
+import { EquipmentSeeder } from "./equiment/equiment.seeder";
 import { PaymentSeeder } from "./payment/payment.seeder";
 import { PitchSeeder } from "./pitch/pitch.seeder";
 import { SponsorSeeder } from "./sponsor/sponsor.seeder";
@@ -63,7 +63,7 @@ async function seeds() {
         await paymentSeeder.seed();
         
         /** @seedEquiment ======================================= */
-        const equimentSeeder = new EquimentSeeder();
+        const equimentSeeder = new EquipmentSeeder();
         await equimentSeeder.seed();
         
         // End of execution
