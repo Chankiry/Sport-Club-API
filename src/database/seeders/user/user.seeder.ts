@@ -48,6 +48,17 @@ const userSeeder = {
             phone       : '012121212',
             password    : '123456',
             is_active   : UsersActiveEnum.Active
-        }
+        },
+        {
+            role_id     : UsersRoleEnum.User,
+            name        : 'Bopha',
+            avatar      : 'static/ecommerce/user/avatar.png',
+            email       : 'bopha@gmail.com',
+            phone       : '084894923',
+            password    : '123456',
+            is_active   : UsersActiveEnum.Active
+
+        },
+
     ]
 }
