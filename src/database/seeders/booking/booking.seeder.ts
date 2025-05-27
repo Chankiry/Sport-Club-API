@@ -4,7 +4,7 @@ export class BookingSeeder {
 
     seed = async () => {
         try {
-            await BookingStatus.bulkCreate(bookingData.statuses);
+            await BookingStatus.bulkCreate(bookingData. statuses);
             console.log('\x1b[32m\nSeed booking statuses inserted successfully.');
         } catch (error) {
             console.error('Error seeding booking statuses:', error);

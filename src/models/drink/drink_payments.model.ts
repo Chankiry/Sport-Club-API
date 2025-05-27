@@ -58,6 +58,7 @@ class DrinksPayment extends Model<DrinksPayment> {
 
     @BelongsTo(() => SponsorPitch)
     sponsor_pitch: SponsorPitch;
+
 }
 
 export default DrinksPayment;

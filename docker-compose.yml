@@ -1,0 +1,36 @@
+version: "3.8"
+services: 
+
+    #===================================>> Database
+    postgres: 
+        image: postgres:latest
+        container_name: sport-club-db-v1
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8005:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: pw@2024
+            POSTGRES_DB: sport-club
+        volumes:
+            - ./db:/var/lib/postgresql/data
+        networks:
+            - sport-club
+     # ===============================>> pgAdmin
+    db-tool:
+        image: dpage/pgadmin4
+        container_name: sport-club-pgadmin-v1
+        restart: always
+        ports:
+            - "8006:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: postgres@camcyber.com
+            PGADMIN_DEFAULT_PASSWORD: pw@2024
+        volumes:
+            - ./pgadmin:/var/lib/pgadmin
+        networks:
+            - sport-club
+
+networks: 
+    sport-club:
