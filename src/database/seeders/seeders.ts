@@ -45,7 +45,10 @@ async function seeds() {
         /** @seedPitch ======================================= */
         const pitchSeeder = new PitchSeeder();
         await pitchSeeder.seed();
-        
+
+        /** @seedDrink ======================================= */
+        const drinkSeeder = new DrinkSeeder();
+        await drinkSeeder.seed();        
         /** @seedSponsor ======================================= */
         const sponsorSeeder = new SponsorSeeder();
         await sponsorSeeder.seed();
@@ -53,10 +56,6 @@ async function seeds() {
         /** @seedBooking ======================================= */
         const bookingSeeder = new BookingSeeder();
         await bookingSeeder.seed();
-        
-        /** @seedDrink ======================================= */
-        const drinkSeeder = new DrinkSeeder();
-        await drinkSeeder.seed();
 
         /** @seedPayment ======================================= */
         const paymentSeeder = new PaymentSeeder();
