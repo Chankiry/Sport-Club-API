@@ -37,12 +37,13 @@ export class PitchSeeder {
 }
 
 const pitchSeeder = {
-   pitch_categories: [
+    pitch_categories: [
+        // Football
         {
             id: 1,
             sport_id: 1,
-            name: "Standard 5v5",
-            required_players: 10,
+            name: "Small Football",
+            required_players: 10,  // 5v5
             volume: 300,
             price: 20.0,
             created_at: now,
@@ -50,16 +51,59 @@ const pitchSeeder = {
         },
         {
             id: 2,
+            sport_id: 1,
+            name: "Big Football",
+            required_players: 22,  // 11v11
+            volume: 500,
+            price: 35.0,
+            created_at: now,
+            updated_at: now,
+        },
+        // Basketball
+        {
+            id: 3,
             sport_id: 2,
-            name: "Half Court",
-            required_players: 6,
+            name: "Small Basketball",
+            required_players: 6,   // 3v3
             volume: 150,
             price: 15.0,
             created_at: now,
             updated_at: now,
+        },
+        {
+            id: 4,
+            sport_id: 2,
+            name: "Big Basketball",
+            required_players: 10,  // 5v5
+            volume: 250,
+            price: 25.0,
+            created_at: now,
+            updated_at: now,
+        },
+        // Tennis
+        {
+            id: 5,
+            sport_id: 3,
+            name: "Small Tennis",
+            required_players: 2,   // Singles
+            volume: 100,
+            price: 10.0,
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            id: 6,
+            sport_id: 3,
+            name: "Big Tennis",
+            required_players: 4,   // Doubles
+            volume: 120,
+            price: 15.0,
+            created_at: now,
+            updated_at: now,
         }
-   ],
+    ],
     pitch: [
+        // Football Small (category_id: 1)
         {
             category_id: 1,
             name: "Football Pitch A",
@@ -67,8 +111,73 @@ const pitchSeeder = {
             updated_at: now,
         },
         {
+            category_id: 1,
+            name: "Football Pitch B",
+            created_at: now,
+            updated_at: now,
+        },
+        // Football Big (category_id: 2)
+        {
             category_id: 2,
+            name: "Football Pitch C",
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            category_id: 2,
+            name: "Football Pitch D",
+            created_at: now,
+            updated_at: now,
+        },
+        // Basketball Small (category_id: 3)
+        {
+            category_id: 3,
             name: "Basketball Court 1",
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            category_id: 3,
+            name: "Basketball Court 2",
+            created_at: now,
+            updated_at: now,
+        },
+        // Basketball Big (category_id: 4)
+        {
+            category_id: 4,
+            name: "Basketball Court 3",
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            category_id: 4,
+            name: "Basketball Court 4",
+            created_at: now,
+            updated_at: now,
+        },
+        // Tennis Small (category_id: 5)
+        {
+            category_id: 5,
+            name: "Tennis Court A",
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            category_id: 5,
+            name: "Tennis Court B",
+            created_at: now,
+            updated_at: now,
+        },
+        // Tennis Big (category_id: 6)
+        {
+            category_id: 6,
+            name: "Tennis Court C",
+            created_at: now,
+            updated_at: now,
+        },
+        {
+            category_id: 6,
+            name: "Tennis Court D",
             created_at: now,
             updated_at: now,
         }
@@ -76,36 +185,31 @@ const pitchSeeder = {
     times_type: [
               {
         from_time: '08:00',
-        to_time: '12:00',
-        price: 20.0,
+        to_time: '16:00',
+        price: 0,
       },
       {
-        from_time: '13:00',
-        to_time: '17:00',
-        price: 22.5,
+        from_time: '16:00',
+        to_time: '18:00',
+        price: 2,
       },
       {
         from_time: '18:00',
         to_time: '22:00',
-        price: 30.0,
+        price: 4,
       },
 
     ],
     dates_type: [
         {
-            from_day: 'Saturday',
-            to_day: 'Saturday',
-            price: 20.0,
-        },
-        {
-            from_day: 'Sunday',
-            to_day: 'Sunday',
-            price: 25.0,
-        },
-        {
             from_day: 'Monday',
             to_day: 'Friday',
-            price: 15.0,
+            price: 0,
+        },
+        {
+            from_day: 'Saturday',
+            to_day: 'Sunday',
+            price: 2,
         }
     ]
 
