@@ -69,6 +69,15 @@ const userSeeder = {
             is_active   : UsersActiveEnum.Active
 
         },
+         {
+            role_id     : UsersRoleEnum.User,
+            name        : 'Chamraoen',
+            avatar      : 'static/ecommerce/user/avatar.png',
+            email       : 'chamraoen@gmail.com',
+            phone       : '098254867',
+            password    : '123456',
+            is_active   : UsersActiveEnum.Active
+        },
 
     ]
 }
