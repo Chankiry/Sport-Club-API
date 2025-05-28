@@ -3,8 +3,7 @@ import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize
 import Sports from '../sport/sports.model';
 import Sponsor from './sponsors.model';
 import Drink from '../drink/drinks.model';
-import Payment from '../payment/payment.model';
-
+import DrinksPayment from '../drink/drink_payments.model';
 // ================================================================>> Custom Library
 
 
@@ -36,7 +35,7 @@ class SponsorPitch extends Model<SponsorPitch> {
     is_sponsored: boolean;
 
     // Foreign Key for Payment model
-    @ForeignKey(() => Payment)
+    @ForeignKey(() => DrinksPayment)
     @Column({ allowNull: true, type: DataType.INTEGER })
     drink_payment_id: number;
 
@@ -59,8 +58,8 @@ class SponsorPitch extends Model<SponsorPitch> {
     @BelongsTo(() => Drink)
     drink: Drink;
 
-    @BelongsTo(() => Payment)
-    payment: Payment;
+    @BelongsTo(() => DrinksPayment)
+    drinks_payment: DrinksPayment;
 }
 
 export default SponsorPitch;
