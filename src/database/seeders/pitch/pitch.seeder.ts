@@ -42,8 +42,9 @@ const pitchSeeder = {
         {
             id: 1,
             sport_id: 1,
+            image: "",
             name: "Small Football",
-            required_players: 10,  // 5v5
+            required_players: 12,  // 6v6
             volume: 300,
             price: 20.0,
             created_at: now,
@@ -52,8 +53,9 @@ const pitchSeeder = {
         {
             id: 2,
             sport_id: 1,
+            image: "",
             name: "Big Football",
-            required_players: 22,  // 11v11
+            required_players: 18,  // 9v9
             volume: 500,
             price: 35.0,
             created_at: now,
@@ -63,6 +65,7 @@ const pitchSeeder = {
         {
             id: 3,
             sport_id: 2,
+            image: "",
             name: "Small Basketball",
             required_players: 6,   // 3v3
             volume: 150,
@@ -73,6 +76,7 @@ const pitchSeeder = {
         {
             id: 4,
             sport_id: 2,
+            image: "",
             name: "Big Basketball",
             required_players: 10,  // 5v5
             volume: 250,
@@ -84,6 +88,7 @@ const pitchSeeder = {
         {
             id: 5,
             sport_id: 3,
+            image: "",
             name: "Small Tennis",
             required_players: 2,   // Singles
             volume: 100,
@@ -94,6 +99,7 @@ const pitchSeeder = {
         {
             id: 6,
             sport_id: 3,
+            image: "",
             name: "Big Tennis",
             required_players: 4,   // Doubles
             volume: 120,

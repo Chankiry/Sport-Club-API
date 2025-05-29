@@ -17,6 +17,9 @@ class Equipment extends Model<Equipment> {
     @Column({ allowNull: false, type: DataType.STRING(255) })
     name: string;
 
+    @Column({ allowNull: true, type: DataType.STRING(255) })
+    description: string;
+
     // Foreign Key for Sport model
     @ForeignKey(() => Sports)
     @Column({ allowNull: false, type: DataType.INTEGER })

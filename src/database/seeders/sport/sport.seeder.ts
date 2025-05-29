@@ -44,6 +44,7 @@ const sportSeeder = {
     sport_ratings: [
         {
             sport_id : 1,
+            user_id: 1,
             rating : 5,
             description: 'Widely loved worldwide.',
             created_at: now,
@@ -51,6 +52,7 @@ const sportSeeder = {
         },
          {
             sport_id : 2,
+            user_id: 1,
             rating : 3,
             description: 'Widely loved worldwide.',
             created_at: now,
@@ -58,6 +60,7 @@ const sportSeeder = {
         },
          {
             sport_id : 3,
+            user_id: 1,
             rating : 4,
             description: 'Widely loved worldwide.',
             created_at: now,
