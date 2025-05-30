@@ -87,4 +87,68 @@ export class AuthService {
         );
     }
 
+    async signup( body: SignUpDto): Promise<any> {
+        const sequelize = new Sequelize(sequelizeConfig);
+        let transaction: Transaction;
+        try {
+            // Start the transaction
+            transaction = await sequelize.transaction();
+
+            const checkName = await User.findOne({
+                where: {name: body.name}
+            });
+            
+            if(checkName){
+                await transaction.rollback();
+                throw new BadRequestException("This name already have account!");
+            }
+
+            const checkPhone = await User.findOne({
+                where: {phone: body.phone}
+            });
+            
+            if(checkPhone){
+                await transaction.rollback();
+                throw new BadRequestException("This phone already have account!");
+            }
+
+            const checkEmail = await User.findOne({
+                where: {email: body.email}
+            });
+            
+            if(checkEmail){
+                await transaction.rollback();
+                throw new BadRequestException("This email already have account!");
+            }
+
+            const user = await User.create(
+                {
+                    name: body.name,
+                    avatar: 'static/ecommerce/user/avatar.png',
+                    email: body.email,
+                    phone: body.phone,
+                    password: body.password,
+                    role_id: UsersRoleEnum.User
+                },
+                {
+                    returning: true,
+                    transaction,
+                }
+            )
+
+            if (!user){
+                await transaction.rollback();
+                throw new BadRequestException('Create user unsuccessfull!');
+            }
+            await transaction.commit();
+
+            return await this.login({username: user.phone, password: body.password});
+
+        }
+        catch(err){
+            throw new BadRequestException(err.message);
+        }
+    }
+
+
 }
