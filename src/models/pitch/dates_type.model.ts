@@ -10,10 +10,7 @@ class DatesType extends Model<DatesType> {
     id: number;
 
     @Column({ allowNull: false, type: DataType.STRING(100) })
-    from_day: string;
-
-    @Column({ allowNull: false, type: DataType.STRING(100) })
-    to_day: string;
+    day: string;
 
     @Column({ allowNull: false, type: DataType.DOUBLE, defaultValue: 0 })
     price: number;

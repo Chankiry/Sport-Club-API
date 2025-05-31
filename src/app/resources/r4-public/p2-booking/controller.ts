@@ -18,4 +18,9 @@ export class PublicBookingController {
         return await this._service.getData();
     }
 
+    @Get("data-setup")
+    async getDataSetup(): Promise<any> {
+        return await this._service.getDataSetup();
+    }
+    
 }
