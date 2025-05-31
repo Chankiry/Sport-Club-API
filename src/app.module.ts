@@ -66,13 +66,7 @@ export class AppModule implements NestModule {
                     path: '', method: RequestMethod.GET
                 },
                 {
-                    path: 'api/public/home', method: RequestMethod.GET
-                },
-                {
-                    path: 'api/public/bookings', method: RequestMethod.GET
-                },
-                {
-                    path: 'api/public/venue', method: RequestMethod.GET
+                    path: 'api/public/(.*)', method: RequestMethod.GET
                 },
                 {
                     path: 'api/auth/login', method: RequestMethod.POST

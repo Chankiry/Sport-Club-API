@@ -189,34 +189,102 @@ const pitchSeeder = {
         }
     ],
     times_type: [
-              {
-        from_time: '08:00',
-        to_time: '16:00',
-        price: 0,
-      },
-      {
-        from_time: '16:00',
-        to_time: '18:00',
-        price: 2,
-      },
-      {
-        from_time: '18:00',
-        to_time: '22:00',
-        price: 4,
-      },
+        {
+            from_time: '08:00',
+            to_time: '9:00',
+            price: 0,
+        },
+        {
+            from_time: '9:00',
+            to_time: '10:00',
+            price: 0,
+        },
+        {
+            from_time: '10:00',
+            to_time: '11:00',
+            price: 0,
+        },
+        {
+            from_time: '11:00',
+            to_time: '12:00',
+            price: 0,
+        },
+        {
+            from_time: '12:00',
+            to_time: '13:00',
+            price: 0,
+        },
+        {
+            from_time: '13:00',
+            to_time: '14:00',
+            price: 0,
+        },
+        {
+            from_time: '15:00',
+            to_time: '16:00',
+            price: 0,
+        },
+        {
+            from_time: '16:00',
+            to_time: '17:00',
+            price: 2,
+        },
+        {
+            from_time: '17:00',
+            to_time: '18:00',
+            price: 2,
+        },
+        {
+            from_time: '18:00',
+            to_time: '19:00',
+            price: 4,
+        },
+        {
+            from_time: '19:00',
+            to_time: '20:00',
+            price: 4,
+        },
+        {
+            from_time: '20:00',
+            to_time: '21:00',
+            price: 4,
+        },
+        {
+            from_time: '21:00',
+            to_time: '22:00',
+            price: 4,
+        },
 
     ],
     dates_type: [
         {
-            from_day: 'Monday',
-            to_day: 'Friday',
+            day: 'Monday',
             price: 0,
         },
         {
-            from_day: 'Saturday',
-            to_day: 'Sunday',
+            day: 'Tuesday',
+            price: 0,
+        },
+        {
+            day: 'Wednesday',
+            price: 0,
+        },
+        {
+            day: 'Thursday',
+            price: 0,
+        },
+        {
+            day: 'Friday',
+            price: 0,
+        },
+        {
+            day: 'Saturday',
             price: 2,
-        }
+        },
+        {
+            day: 'Sunday',
+            price: 2,
+        },
     ]
 
 };
