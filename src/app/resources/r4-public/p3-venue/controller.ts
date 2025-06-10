@@ -1,21 +1,16 @@
-// ===========================================================================>> Core Library
+// src/app/resources/r4-public/p3-venue/controller.ts
 import { Controller, Get, Query } from '@nestjs/common';
-
-// ===========================================================================>> Third Party Library
-
-// ===========================================================================>> Custom Library
 import { PublicVenueService } from './service';
 
 @Controller()
 export class PublicVenueController {
+  constructor(private readonly _service: PublicVenueService) {}
 
-    constructor(
-        private readonly _service: PublicVenueService
-    ) { }
-
-    @Get()
-    async getData(): Promise<any> {
-        return await this._service.getData();
-    }
-
+@Get('/sport-ratings')
+getRatingsBySportId(@Query('sport_id') sportId: number) {
+  return this._service.getSportRatingsBySportId(sportId); 
 }
+
+  
+}
+

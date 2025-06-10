@@ -11,7 +11,7 @@ class SportRating extends Model<SportRating> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    // Foreign Key for Sport model
+    // Foreign Key for Sport model 
     @ForeignKey(() => Sports)
     @Column({ allowNull: false, type: DataType.INTEGER })
     sport_id: number;
@@ -41,6 +41,10 @@ class SportRating extends Model<SportRating> {
 
     @BelongsTo(() => Sports)
     sport: Sports;
+    avg_rating: string;
+    
+    @BelongsTo(() => User)
+    user: User;
 
 }
 
