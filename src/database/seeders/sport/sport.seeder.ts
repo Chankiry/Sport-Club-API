@@ -65,6 +65,14 @@ const sportSeeder = {
             description: 'Widely loved worldwide.',
             created_at: now,
             updated_at: now
+        },
+        {
+            sport_id : 2,
+            user_id: 3,
+            rating : 4,
+            description: 'Best place for basketball court.',
+            created_at: now,
+            updated_at: now
         }
     ]
 };
