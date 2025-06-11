@@ -17,8 +17,10 @@ import { appRoutes } from './app.routing';
 import { TimeoutInterceptor } from './app/interceptors/timeout.interceptor';
 
 // Resources
-import { AuthModule } from './app/resources/account/auth/auth.module';
-import { AdminModule } from './app/resources/admin/admin.module';
+import { AuthModule } from './app/resources/r1-account/auth/auth.module';
+import { AdminModule } from './app/resources/r2-admin/admin.module';
+import { UserModule } from './app/resources/r3-user/user.module';
+import { PublicModule } from './app/resources/r4-public/public.module';
 
 
 // ======================================= >> Code Starts Here << ========================== //
@@ -29,7 +31,16 @@ import { AdminModule } from './app/resources/admin/admin.module';
     imports: [
         ConfigModule,
         AuthModule,
+
+        // Admin Module
         AdminModule,
+
+        // User Module
+        UserModule,
+
+        // Public Module
+        PublicModule,
+
         RouterModule.register(appRoutes)
     ],
     providers: [
@@ -55,19 +66,13 @@ export class AppModule implements NestModule {
                     path: '', method: RequestMethod.GET
                 },
                 {
-                    path: 'api/public', method: RequestMethod.GET
-                },
-                {
-                    path: 'api/public/view-product/:id', method: RequestMethod.GET
+                    path: 'api/public/(.*)', method: RequestMethod.GET
                 },
                 {
                     path: 'api/auth/login', method: RequestMethod.POST
                 },
                 {
                     path: 'api/auth/sign-up', method: RequestMethod.POST
-                },
-                {
-                    path: 'api/auth/register', method: RequestMethod.POST
                 })
             .forRoutes({ path: '*', method: RequestMethod.ALL });
     }

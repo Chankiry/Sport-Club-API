@@ -23,17 +23,17 @@ export class PaymentSeeder {
 const paymentData = {
             paymentTypes: [
             {
-                name: 'Cash',
+                name: 'booking',
                 created_at: now,
                 updated_at: now,
             }, 
             {
-                name: 'Credit Card',
+                name: 'drink',
                 created_at: now,
                 updated_at: now,
             },
             {
-                name: 'Bank Transfer',
+                name: 'equiment',
                 created_at: now,
                 updated_at: now,
             },
@@ -50,7 +50,7 @@ const paymentData = {
             },
             {
                 receipt_number: 'RCPT-1002',
-                booking_id: 2,
+                booking_id: null,
                 type_id: 2,
                 is_paid: false,
                 total_price: 85.00,
@@ -59,8 +59,8 @@ const paymentData = {
             },
             {
                 receipt_number: 'RCPT-1003',
-                booking_id: 3,
-                type_id: 1,
+                booking_id: null,
+                type_id: 3,
                 is_paid: true,
                 total_price: 150.75,
                 created_at: now,

@@ -1,7 +1,9 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import Booking from '../booking/bookings.model';
 import PaymentType from './payments_types.model';
+import DrinksPayment from '../drink/drink_payments.model';
+import EquipmentPayment from '../equiment/equitment_payment.model';
 
 // ================================================================>> Custom Library
 
@@ -17,7 +19,7 @@ class Payment extends Model<Payment> {
 
     // Foreign Key for Booking model
     @ForeignKey(() => Booking)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     booking_id: number;
 
     // Foreign Key for PaymentType model
@@ -43,6 +45,13 @@ class Payment extends Model<Payment> {
 
     @BelongsTo(() => PaymentType)
     payment_type: PaymentType;
+
+    @HasMany(() => DrinksPayment)
+    drinks_payments: DrinksPayment[];
+
+    @HasMany(() => EquipmentPayment)
+    equipments_payments: EquipmentPayment[];
+    
 }
 
 export default Payment;

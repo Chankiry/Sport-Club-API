@@ -9,8 +9,14 @@ class Sports extends Model<Sports> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
+    @Column({ allowNull: true, type: DataType.STRING(100) })
+    image: string;
+
     @Column({ allowNull: false, type: DataType.STRING(100) })
     name: string;
+
+    @Column({ allowNull: true, type: DataType.STRING(500) })
+    description: string;
 
     @Column({ allowNull: false, type: DataType.DATE })
     created_at: Date;

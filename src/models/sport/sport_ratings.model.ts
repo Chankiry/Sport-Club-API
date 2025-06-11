@@ -1,6 +1,7 @@
 // ================================================================>> Third Party Library
 import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import Sports from './sports.model';
+import User from '../user/user.model';
 
 // ================================================================>> Costom Library
 
@@ -10,10 +11,14 @@ class SportRating extends Model<SportRating> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    // Foreign Key for Sport model
+    // Foreign Key for Sport model 
     @ForeignKey(() => Sports)
     @Column({ allowNull: false, type: DataType.INTEGER })
     sport_id: number;
+
+    @ForeignKey(() => User)
+    @Column({ allowNull: false, type: DataType.INTEGER })
+    user_id: number;
 
     @Column({
         allowNull: false,
@@ -36,6 +41,10 @@ class SportRating extends Model<SportRating> {
 
     @BelongsTo(() => Sports)
     sport: Sports;
+    avg_rating: string;
+    
+    @BelongsTo(() => User)
+    user: User;
 
 }
 

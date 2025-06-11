@@ -14,6 +14,9 @@ class PitchesCategory extends Model<PitchesCategory> {
     @Column({ onDelete: 'CASCADE' })
     sport_id: number;
 
+    @Column({ allowNull: true, type: DataType.STRING(100) })
+    image: string;
+
     @Column({ allowNull: false, type: DataType.STRING(100) })
     name: string;
 
