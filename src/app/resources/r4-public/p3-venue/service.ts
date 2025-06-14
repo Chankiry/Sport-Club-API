@@ -1,5 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import PitchesCategory from 'src/models/pitch/pitches_category.model';
 import SportRating from 'src/models/sport/sport_ratings.model';
+import Sports from 'src/models/sport/sports.model';
 import User from 'src/models/user/user.model';
 
 @Injectable()
@@ -32,4 +34,33 @@ export class PublicVenueService {
       throw new InternalServerErrorException('Failed to fetch sport ratings');
     }
   }
+async getPitchCategoriesBySportId(sport_id: number) {
+  try {
+    const categories = await PitchesCategory.findAll({
+      where: { sport_id },
+      include: [{ model: Sports, attributes: ['id', 'name'] }],
+      order: [['created_at', 'DESC']],
+    });
+
+    return categories.map((category) => ({
+      id: category.id,
+      name: category.name,
+      image: category.image,
+      required_players: category.required_players,
+      volume: category.volume,
+      price: category.price,
+      created_at: category.createdAt,
+      updated_at: category.updatedAt,
+      sport: category.sport
+        ? {
+            id: category.sport.id,
+            name: category.sport.name,
+          }
+        : null,
+    }));
+  } catch (error) {
+    console.error('❌ Failed to fetch pitch categories:', error.message);
+    throw new InternalServerErrorException('Failed to fetch pitch categories');
+  }
+}
 }
