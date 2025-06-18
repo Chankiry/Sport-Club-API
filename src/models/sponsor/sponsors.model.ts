@@ -12,23 +12,23 @@ class Sponsor extends Model<Sponsor> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     company_name: string;
 
     // Foreign Key for Sport model
     @ForeignKey(() => Sports)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sport_id: number;
 
     // Foreign Key for Drink model
     @ForeignKey(() => Drink)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     drink_id: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

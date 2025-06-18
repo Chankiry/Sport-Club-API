@@ -10,7 +10,7 @@ class Blacklist extends Model<Blacklist> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     name: string;
 
     @Column({ allowNull: true, type: DataType.STRING(15) })
@@ -24,13 +24,13 @@ class Blacklist extends Model<Blacklist> {
 
     // Foreign Key for User model
     @ForeignKey(() => User)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     user_id: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

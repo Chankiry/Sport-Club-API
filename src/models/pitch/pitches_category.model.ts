@@ -17,16 +17,16 @@ class PitchesCategory extends Model<PitchesCategory> {
     @Column({ allowNull: true, type: DataType.STRING(100) })
     image: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     name: string;
 
-    @Column({ allowNull: false, type: DataType.INTEGER, defaultValue: 0 })
+    @Column({ allowNull: true, type: DataType.INTEGER, defaultValue: 0 })
     required_players: number;
 
-    @Column({ allowNull: false, type: DataType.INTEGER, defaultValue: 0 })
+    @Column({ allowNull: true, type: DataType.INTEGER, defaultValue: 0 })
     volume: number;
 
-    @Column({ allowNull: false, type: DataType.DOUBLE, defaultValue: 0 })
+    @Column({ allowNull: true, type: DataType.DOUBLE, defaultValue: 0 })
     price: number;
 
      // Associations (BelongsTo)
