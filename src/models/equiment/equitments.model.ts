@@ -14,7 +14,7 @@ class Equipment extends Model<Equipment> {
     @Column({ allowNull: true, type: DataType.STRING(255) })
     image: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     name: string;
 
     @Column({ allowNull: true, type: DataType.STRING(255) })
@@ -22,16 +22,16 @@ class Equipment extends Model<Equipment> {
 
     // Foreign Key for Sport model
     @ForeignKey(() => Sports)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sport_id: number;
 
-    @Column({ allowNull: false, type: DataType.DOUBLE })
+    @Column({ allowNull: true, type: DataType.DOUBLE })
     price: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

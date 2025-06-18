@@ -15,23 +15,23 @@ class SponsorPitch extends Model<SponsorPitch> {
 
     // Foreign Key for Sponsor model
     @ForeignKey(() => Sponsor)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sponsor_id: number;
 
     // Foreign Key for Sport model
     @ForeignKey(() => Sports)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sport_id: number;
 
     // Foreign Key for Drink model
     @ForeignKey(() => Drink)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     drink_id: number;
 
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     drinks_qty: number;
 
-    @Column({ allowNull: false, type: DataType.BOOLEAN })
+    @Column({ allowNull: true, type: DataType.BOOLEAN })
     is_sponsored: boolean;
 
     // Foreign Key for Payment model
@@ -39,13 +39,13 @@ class SponsorPitch extends Model<SponsorPitch> {
     @Column({ allowNull: true, type: DataType.INTEGER })
     drink_payment_id: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     expired_date: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

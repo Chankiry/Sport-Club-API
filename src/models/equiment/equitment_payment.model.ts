@@ -15,29 +15,29 @@ class EquipmentPayment extends Model<EquipmentPayment> {
 
     // Foreign Key for User model
     @ForeignKey(() => User)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     user_id: number;
 
     // Foreign Key for Equipment model
     @ForeignKey(() => Equipment)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     equipments_id: number;
 
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     qty: number;
 
     // Foreign Key for Payment model
     @ForeignKey(() => Payment)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     payment_id: number;
 
-    @Column({ allowNull: false, type: DataType.DOUBLE })
+    @Column({ allowNull: true, type: DataType.DOUBLE })
     total_price: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

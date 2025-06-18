@@ -12,16 +12,16 @@ class Sports extends Model<Sports> {
     @Column({ allowNull: true, type: DataType.STRING(100) })
     image: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     name: string;
 
     @Column({ allowNull: true, type: DataType.STRING(500) })
     description: string;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
 }

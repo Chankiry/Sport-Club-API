@@ -8,7 +8,7 @@ class BookingStatus extends Model<BookingStatus> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     name: string;
 
     @Column({ allowNull: true, type: DataType.STRING(255) })
@@ -17,10 +17,10 @@ class BookingStatus extends Model<BookingStatus> {
     @Column({ allowNull: true, type: DataType.STRING(255) })
     color: string;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
      // Association - One BookingStatus can have many Bookings

@@ -9,14 +9,14 @@ class TimesType extends Model<TimesType> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     from_time: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     to_time: string;
 
-    @Column({ allowNull: false, type: DataType.DOUBLE, defaultValue: 0 })
-    price: number;
+    @Column({ allowNull: true, type: DataType.DOUBLE, defaultValue: 0 })
+    price_multiplier: number;
 
 }
 
