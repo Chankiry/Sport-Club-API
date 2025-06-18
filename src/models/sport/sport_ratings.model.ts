@@ -13,15 +13,15 @@ class SportRating extends Model<SportRating> {
 
     // Foreign Key for Sport model 
     @ForeignKey(() => Sports)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sport_id: number;
 
     @ForeignKey(() => User)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     user_id: number;
 
     @Column({
-        allowNull: false,
+        allowNull: true,
         type: DataType.INTEGER(),
         validate: {
             min: 1,
@@ -30,13 +30,13 @@ class SportRating extends Model<SportRating> {
     })
     rating: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(500) })
+    @Column({ allowNull: true, type: DataType.STRING(500) })
     description: string;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     @BelongsTo(() => Sports)
