@@ -1,8 +1,8 @@
 // ================================================================>> Third Party Library
 import { Model, Column, Table, DataType } from 'sequelize-typescript';
 
-@Table({ tableName: 'payments_type', createdAt: 'created_at', updatedAt: 'updated_at' })
-class PaymentType extends Model<PaymentType> {
+@Table({ tableName: 'payments_method', createdAt: 'created_at', updatedAt: 'updated_at' })
+class PaymentMethod extends Model<PaymentMethod> {
 
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
@@ -17,4 +17,4 @@ class PaymentType extends Model<PaymentType> {
     updated_at: Date;
 }
 
-export default PaymentType;
+export default PaymentMethod;

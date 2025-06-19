@@ -16,34 +16,34 @@ class DrinksPayment extends Model<DrinksPayment> {
 
     // Foreign Key for Drink model
     @ForeignKey(() => Drink)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     drink_id: number;
 
     // Foreign Key for Booking model
     @ForeignKey(() => Booking)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     booking_id: number;
 
     // Foreign Key for Payment model
     @ForeignKey(() => Payment)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     payment_id: number;
 
     // Foreign Key for SponsorPitch model
     @ForeignKey(() => SponsorPitch)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     sponsor_pitch_id: number;
 
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     qty: number;
 
-    @Column({ allowNull: false, type: DataType.DOUBLE })
+    @Column({ allowNull: true, type: DataType.DOUBLE })
     total_price: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)

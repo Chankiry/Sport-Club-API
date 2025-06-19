@@ -16,29 +16,29 @@ class User extends Model<User> {
     @Column({ onDelete: 'CASCADE' })
     role_id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     name: string;
 
     @Column({ allowNull: true, type: DataType.STRING(100) })
     avatar: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     phone: string;
 
     @Column({ allowNull: true, type: DataType.STRING(100), defaultValue: null })
     phone2: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100) })
+    @Column({ allowNull: true, type: DataType.STRING(100) })
     email: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(100), set(value: string) 
+    @Column({ allowNull: true, type: DataType.STRING(100), set(value: string) 
         {const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(value, salt);
             this.setDataValue('password', hash);
         },
     })                                                                                              password: string;
 
-    @Column({ allowNull: false, type: DataType.INTEGER, defaultValue: UsersActiveEnum.Active })
+    @Column({ allowNull: true, type: DataType.INTEGER, defaultValue: UsersActiveEnum.Active })
     is_active: UsersActiveEnum;
 
     @BelongsTo(() => UsersRole)

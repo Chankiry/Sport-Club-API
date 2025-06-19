@@ -192,98 +192,98 @@ const pitchSeeder = {
         {
             from_time: '08:00',
             to_time: '9:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '9:00',
             to_time: '10:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '10:00',
             to_time: '11:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '11:00',
             to_time: '12:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '12:00',
             to_time: '13:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '13:00',
             to_time: '14:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '15:00',
             to_time: '16:00',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             from_time: '16:00',
             to_time: '17:00',
-            price: 2,
+            price_multiplier: 1.2,
         },
         {
             from_time: '17:00',
             to_time: '18:00',
-            price: 2,
+            price_multiplier: 1.2,
         },
         {
             from_time: '18:00',
             to_time: '19:00',
-            price: 4,
+            price_multiplier: 1.4,
         },
         {
             from_time: '19:00',
             to_time: '20:00',
-            price: 4,
+            price_multiplier: 1.4,
         },
         {
             from_time: '20:00',
             to_time: '21:00',
-            price: 4,
+            price_multiplier: 1.4,
         },
         {
             from_time: '21:00',
             to_time: '22:00',
-            price: 4,
+            price_multiplier: 1.4,
         },
 
     ],
     dates_type: [
         {
             day: 'Monday',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             day: 'Tuesday',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             day: 'Wednesday',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             day: 'Thursday',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             day: 'Friday',
-            price: 0,
+            price_multiplier: 1,
         },
         {
             day: 'Saturday',
-            price: 2,
+            price_multiplier: 1.2,
         },
         {
             day: 'Sunday',
-            price: 2,
+            price_multiplier: 1.2,
         },
     ]
 
