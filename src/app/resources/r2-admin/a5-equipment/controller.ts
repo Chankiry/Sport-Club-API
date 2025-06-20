@@ -18,4 +18,6 @@ export class AdminEquipmentController {
         return await this._service.getData();
     }
 
+    
+
 }
