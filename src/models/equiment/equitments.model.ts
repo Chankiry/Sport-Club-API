@@ -5,7 +5,7 @@ import Sports from '../sport/sports.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'equipments', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'equipments', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Equipment extends Model<Equipment> {
 
     @Column({ primaryKey: true, autoIncrement: true })

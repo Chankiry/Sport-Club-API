@@ -8,7 +8,7 @@ import Payment from '../payment/payment.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'drinks_payments', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'drinks_payments', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class DrinksPayment extends Model<DrinksPayment> {
 
     @Column({ primaryKey: true, autoIncrement: true })

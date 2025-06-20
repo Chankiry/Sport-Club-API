@@ -6,7 +6,7 @@ import UsersRole            from './role.model';
 import { UsersActiveEnum }  from '../../app/enums/user/active.enum';
 import * as bcrypt from 'bcryptjs';
 
-@Table({ tableName: 'user', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'user', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class User extends Model<User> {
     /** @noted id is auto create by sequelize, so we can delete it from here it you want. */
     @Column({ primaryKey: true, autoIncrement: true })
@@ -36,10 +36,20 @@ class User extends Model<User> {
         const hash = bcrypt.hashSync(value, salt);
             this.setDataValue('password', hash);
         },
-    })                                                                                              password: string;
+    })                                                                                              
+    password: string;
 
     @Column({ allowNull: true, type: DataType.INTEGER, defaultValue: UsersActiveEnum.Active })
     is_active: UsersActiveEnum;
+
+    @Column({ allowNull: true, type: DataType.DATE, defaultValue: null })                           
+    last_login_at: Date;
+
+    @Column({ allowNull: true, type: DataType.DATE })
+    created_at: Date;
+
+    @Column({ allowNull: true, type: DataType.DATE })
+    updated_at: Date;
 
     @BelongsTo(() => UsersRole)
     role: UsersRole;

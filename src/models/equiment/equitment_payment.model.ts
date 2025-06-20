@@ -7,7 +7,7 @@ import Payment from '../payment/payment.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'equipments_payment', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'equipments_payment', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class EquipmentPayment extends Model<EquipmentPayment> {
 
     @Column({ primaryKey: true, autoIncrement: true })

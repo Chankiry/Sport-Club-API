@@ -65,6 +65,18 @@ export class AuthService {
         const role: string = user.role.name ?? '';
         const token = this._generateToken(user);
 
+        if (token) {
+            await User.update(
+                {
+                    last_login_at: new Date()
+                },
+                {
+                    where: { id: user.id },
+                    silent: true,
+                }
+            )
+        }
+
         // ===>> Prepare Response
         return {
             access_token: token,
@@ -124,7 +136,7 @@ export class AuthService {
             const user = await User.create(
                 {
                     name: body.name,
-                    avatar: 'static/ecommerce/user/avatar.png',
+                    avatar: 'static/sport-club/user/avatar.png',
                     email: body.email,
                     phone: body.phone,
                     password: body.password,

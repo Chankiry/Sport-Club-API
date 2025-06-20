@@ -3,7 +3,7 @@ import { Model, Column, Table, DataType } from 'sequelize-typescript';
 
 // ================================================================>> Costom Library
 
-@Table({ tableName: 'sports', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'sports', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Sports extends Model<Sports> {
 
     @Column({ primaryKey: true, autoIncrement: true })

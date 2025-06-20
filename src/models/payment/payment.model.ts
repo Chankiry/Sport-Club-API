@@ -10,7 +10,7 @@ import PaymentStatus from './payments_status.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'payments', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'payments', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Payment extends Model<Payment> {
 
     @Column({ primaryKey: true, autoIncrement: true })

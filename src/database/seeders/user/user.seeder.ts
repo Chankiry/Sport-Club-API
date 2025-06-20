@@ -34,7 +34,7 @@ const userSeeder = {
         {
             role_id     : UsersRoleEnum.Admin,
             name        : 'Kiry',
-            avatar      : 'static/ecommerce/user/avatar.png',
+            avatar      : 'static/sport-club/user/avatar.png',
             email       : 'kiry.kh@gmail.com',
             phone       : '012345678',
             password    : '123456',
@@ -43,7 +43,7 @@ const userSeeder = {
         {
             role_id     : UsersRoleEnum.User,
             name        : 'Satya',
-            avatar      : 'static/ecommerce/user/avatar.png',
+            avatar      : 'static/sport-club/user/avatar.png',
             email       : 'satya@gmail.com',
             phone       : '012121212',
             password    : '123456',
@@ -52,7 +52,7 @@ const userSeeder = {
         {
             role_id     : UsersRoleEnum.User,
             name        : 'Bopha',
-            avatar      : 'static/ecommerce/user/avatar.png',
+            avatar      : 'static/sport-club/user/avatar.png',
             email       : 'bopha@gmail.com',
             phone       : '084894923',
             password    : '123456',
@@ -62,7 +62,7 @@ const userSeeder = {
         {
             role_id     : UsersRoleEnum.User,
             name        : 'Theary',
-            avatar      : 'static/ecommerce/user/avatar.png',
+            avatar      : 'static/sport-club/user/avatar.png',
             email       : 'theary@gmail.com',
             phone       : '0966538869',
             password    : '123456',
@@ -72,7 +72,7 @@ const userSeeder = {
          {
             role_id     : UsersRoleEnum.User,
             name        : 'Chamraoen',
-            avatar      : 'static/ecommerce/user/avatar.png',
+            avatar      : 'static/sport-club/user/avatar.png',
             email       : 'chamraoen@gmail.com',
             phone       : '098254867',
             password    : '123456',

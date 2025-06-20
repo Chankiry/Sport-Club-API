@@ -5,7 +5,7 @@ import User from '../user/user.model';
 
 // ================================================================>> Costom Library
 
-@Table({ tableName: 'sport_ratings', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'sport_ratings', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class SportRating extends Model<SportRating> {
 
     @Column({ primaryKey: true, autoIncrement: true })
