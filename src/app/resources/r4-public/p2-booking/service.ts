@@ -6,6 +6,7 @@ import { Op, Sequelize }       from 'sequelize';
 import * as moment  from 'moment';
 import TimesType from 'src/models/pitch/times_type.model';
 import DatesType from 'src/models/pitch/dates_type.model';
+import Booking from 'src/models/booking/bookings.model';
 
 
 // ===========================================================================>> Custom Library
@@ -19,7 +20,10 @@ export class PublicBookingService {
     async getData() { 
         try {
             
-            return 'Welcome to Public Booking';
+            const bookings = await Booking.findAll();
+            return {
+                data: bookings
+            };
 
         } catch (error) {
             console.error(error);

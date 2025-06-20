@@ -4,6 +4,8 @@ import Booking from '../booking/bookings.model';
 import PaymentType from './payments_types.model';
 import DrinksPayment from '../drink/drink_payments.model';
 import EquipmentPayment from '../equiment/equitment_payment.model';
+import PaymentMethod from './payments_method.model';
+import PaymentStatus from './payments_status.model';
 
 // ================================================================>> Custom Library
 
@@ -14,7 +16,7 @@ class Payment extends Model<Payment> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     receipt_number: string;
 
     // Foreign Key for Booking model
@@ -23,25 +25,36 @@ class Payment extends Model<Payment> {
     booking_id: number;
 
     // Foreign Key for PaymentType model
+    @ForeignKey(() => PaymentStatus)
+    @Column({ allowNull: true, type: DataType.INTEGER })
+    status_id: number;
+
+    @ForeignKey(() => PaymentMethod)
+    @Column({ allowNull: true, type: DataType.INTEGER })
+    method_id: number;
+
     @ForeignKey(() => PaymentType)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     type_id: number;
 
-    @Column({ allowNull: false, type: DataType.BOOLEAN })
-    is_paid: boolean;
-
-    @Column({ allowNull: false, type: DataType.DOUBLE })
+    @Column({ allowNull: true, type: DataType.DOUBLE })
     total_price: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)
     @BelongsTo(() => Booking)
     booking: Booking;
+
+    @BelongsTo(() => PaymentStatus)
+    payment_status: PaymentStatus;
+
+    @BelongsTo(() => PaymentMethod)
+    payment_method: PaymentMethod;
 
     @BelongsTo(() => PaymentType)
     payment_type: PaymentType;

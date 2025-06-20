@@ -10,7 +10,8 @@ export class PublicVenueController {
 getRatingsBySportId(@Query('sport_id') sportId: number) {
   return this._service.getSportRatingsBySportId(sportId); 
 }
-
-  
+@Get('/pitch-categories')
+getPitchCategoriesBySportId(@Query('sport_id') sportId: number) {
+  return this._service.getPitchCategoriesBySportId(sportId);
 }
-
+}

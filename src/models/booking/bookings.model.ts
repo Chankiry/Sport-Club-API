@@ -16,6 +16,9 @@ class Booking extends Model<Booking> {
     @Column({ primaryKey: true, autoIncrement: true })
     id: number;
 
+    @Column({ allowNull: true, type: DataType.STRING(255) })
+    name: string;
+
     @Column({ allowNull: true, type: DataType.STRING(15) })
     phone1: string;
 
@@ -24,34 +27,34 @@ class Booking extends Model<Booking> {
 
     // Foreign Key for Pitch model
     @ForeignKey(() => Pitches)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     pitch_id: number;
 
     // Foreign Key for User model
     @ForeignKey(() => User)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     user_id: number;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     date: Date;
 
     // Foreign Key for DateType model
     @ForeignKey(() => DatesType)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     date_type_id: number;
 
-    @Column({ allowNull: false, type: DataType.TIME })
+    @Column({ allowNull: true, type: DataType.TIME })
     time: string;
 
     // Foreign Key for TimeType model
     @ForeignKey(() => TimesType)
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     time_type_id: number;
 
-    @Column({ allowNull: false, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER })
     duration: number;
 
-    @Column({ allowNull: false, type: DataType.BOOLEAN })
+    @Column({ allowNull: true, type: DataType.BOOLEAN })
     needed_match: boolean;
 
     // Foreign Key for BookingStatus model
@@ -59,13 +62,13 @@ class Booking extends Model<Booking> {
     @Column({ allowNull: true, type: DataType.INTEGER })
     booking_status_id: number;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
+    @Column({ allowNull: true, type: DataType.STRING(255) })
     price: string;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     created_at: Date;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
 
     // Associations (BelongsTo)
