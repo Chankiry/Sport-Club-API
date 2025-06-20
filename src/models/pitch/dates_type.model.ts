@@ -3,7 +3,7 @@ import { Model, Column, Table, DataType, ForeignKey } from 'sequelize-typescript
 
 // ================================================================>> Costom Library
 
-@Table({ tableName: 'dates_type', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'dates_type', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class DatesType extends Model<DatesType> {
 
     @Column({ primaryKey: true, autoIncrement: true })

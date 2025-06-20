@@ -12,6 +12,7 @@ const main = async () => {
         console.log('Connection has been established successfully.'.green);
         process.exit(0);
     } catch (error) {
+        console.log(error)
         console.error('Unable to connect to the database: '.yellow + (error.message).red);
         process.exit(0);
     } finally {

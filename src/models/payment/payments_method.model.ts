@@ -1,7 +1,7 @@
 // ================================================================>> Third Party Library
 import { Model, Column, Table, DataType } from 'sequelize-typescript';
 
-@Table({ tableName: 'payments_method', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'payments_method', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class PaymentMethod extends Model<PaymentMethod> {
 
     @Column({ primaryKey: true, autoIncrement: true })
