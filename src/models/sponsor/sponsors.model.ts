@@ -6,7 +6,7 @@ import Sports from '../sport/sports.model';
 // ================================================================>> Custom Library
 
 
-@Table({ tableName: 'sponsors', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'sponsors', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Sponsor extends Model<Sponsor> {
 
     @Column({ primaryKey: true, autoIncrement: true })

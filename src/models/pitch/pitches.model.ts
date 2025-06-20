@@ -4,7 +4,7 @@ import PitchesCategory from './pitches_category.model';
 
 // ================================================================>> Costom Library
 
-@Table({ tableName: 'pitches', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'pitches', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Pitches extends Model<Pitches> {
 
     @Column({ primaryKey: true, autoIncrement: true })

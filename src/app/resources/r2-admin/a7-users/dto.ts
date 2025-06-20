@@ -32,7 +32,7 @@ export class CreateUserDTO {
 
     @IsString()
     @Optional()
-    avatar: string = 'static/ecommerce/user/avatar.png';
+    avatar: string = 'static/sport-club/user/avatar.png';
 
     @IsNumber()
     @IsNotEmpty()
