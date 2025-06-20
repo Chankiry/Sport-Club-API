@@ -58,8 +58,10 @@ export class AdminPitchCategoryService {
     // Update
     async update(id: number, body: CreatePitchCategoryDto) {
     try {
-        const sport = await Sports.findByPk(body.sport_id);
-        if (!sport) throw new BadRequestException('sport with this id does not exist please check again');
+        if(body.sport_id !== null && body.sport_id !==undefined){
+            const sport = await Sports.findByPk(body.sport_id);
+            if (!sport) throw new BadRequestException('sport with this id does not exist please check again');
+        }
         const record = await this.model.findByPk(id);
         if (!record) throw new NotFoundException('pitch category with this id does not exist please check again');
 
