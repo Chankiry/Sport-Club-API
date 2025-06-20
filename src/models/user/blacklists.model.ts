@@ -4,7 +4,7 @@ import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize
 // ================================================================>> Custom Library
 import User from './user.model';  // Assuming you have a 'User' model
 
-@Table({ tableName: 'blacklists', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'blacklists', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Blacklist extends Model<Blacklist> {
 
     @Column({ primaryKey: true, autoIncrement: true })

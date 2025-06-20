@@ -2,7 +2,7 @@
 import { Model, Column, Table, DataType, HasMany } from 'sequelize-typescript';
 import Booking from './bookings.model';
 
-@Table({ tableName: 'bookings_status', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'bookings_status', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class BookingStatus extends Model<BookingStatus> {
 
     @Column({ primaryKey: true, autoIncrement: true })

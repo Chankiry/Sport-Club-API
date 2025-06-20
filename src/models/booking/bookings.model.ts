@@ -10,7 +10,7 @@ import BookingStatus from './booking_status.model';
 import Payment from '../payment/payment.model';
  
 
-@Table({ tableName: 'bookings', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({ tableName: 'bookings', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class Booking extends Model<Booking> {
 
     @Column({ primaryKey: true, autoIncrement: true })
