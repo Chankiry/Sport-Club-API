@@ -21,7 +21,6 @@ export class AdminPitchCategoryController {
 
   @Post()
   async create(@Body() body: CreatePitchCategoryDto): Promise<any> {
-    console.log(body);
     return await this._service.create(body);
   }
 

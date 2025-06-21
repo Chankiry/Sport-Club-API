@@ -10,5 +10,9 @@ export const userRoutes: Routes = [
     {
         path: 'bookings',
         module: UserBookingModule
+    },
+    {
+        path: 'equipments',
+        module: UserBookingModule
     }
 ];
