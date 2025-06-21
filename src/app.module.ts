@@ -21,6 +21,7 @@ import { AuthModule } from './app/resources/r1-account/auth/auth.module';
 import { AdminModule } from './app/resources/r2-admin/admin.module';
 import { UserModule } from './app/resources/r3-user/user.module';
 import { PublicModule } from './app/resources/r4-public/public.module';
+import { ProfileModule } from './app/resources/r1-account/profile/profile.module';
 
 
 // ======================================= >> Code Starts Here << ========================== //
@@ -31,6 +32,7 @@ import { PublicModule } from './app/resources/r4-public/public.module';
     imports: [
         ConfigModule,
         AuthModule,
+        ProfileModule,
 
         // Admin Module
         AdminModule,

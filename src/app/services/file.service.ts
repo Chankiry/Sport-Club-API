@@ -12,6 +12,7 @@ interface File {
 
 @Injectable()
 export class FileService {
+    [x: string]: any;
 
     private fileBaseUrl  = process.env.FILE_BASE_URL;
 
