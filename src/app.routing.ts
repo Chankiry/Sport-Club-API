@@ -7,6 +7,7 @@ import { AuthModule } from './app/resources/r1-account/auth/auth.module';
 import { adminRoutes } from './app/resources/r2-admin/admin.routes';
 import { userRoutes } from './app/resources/r3-user/user.routes';
 import { publicRoutes } from './app/resources/r4-public/public.routes';
+import { ProfileModule } from './app/resources/r1-account/profile/profile.module';
 
 export const appRoutes: Routes = [{
     path: 'api',
@@ -14,6 +15,10 @@ export const appRoutes: Routes = [{
         {
             path: 'auth',
             module: AuthModule
+        },
+        {
+            path: 'profile',
+            module: ProfileModule
         },
         {
             path: 'admin',
