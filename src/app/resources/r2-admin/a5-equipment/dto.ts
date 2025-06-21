@@ -1,23 +1,27 @@
-import { IsUrl, IsNotEmpty, IsString, isString, IsIn, IsInt } from "class-validator";
-import { IsFloat } from "sequelize-typescript";
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsNumber,
+} from 'class-validator';
 
 export class CreateEquippmentDto {
-    @IsUrl()
-    @IsNotEmpty()
-    image: string;
+  @IsString()
+  @IsOptional()
+  image: string = 'static/ecommerce/user/avatar.png';
 
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    description: string;
+  @IsString()
+  description: string;
 
-    @IsNotEmpty()
-    @IsInt()
-    sport_id: number;
+  @IsNotEmpty()
+  @IsNumber()
+  sport_id: number;
 
-    @IsNotEmpty()
-    @IsInt()
-    price: number;
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
 }
