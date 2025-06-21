@@ -3,10 +3,12 @@ import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/c
 import { JwtMiddleware } from 'src/app/middlewares/jwt.middleware';
 
 import { UserBookingModule } from './u1-booking/module';
+import { UserEquipmentModule } from './u2-equipment/module';
 
 @Module({
     imports: [
-        UserBookingModule
+        UserBookingModule,
+        UserEquipmentModule
     ]
 })
 

@@ -59,7 +59,7 @@ async getPitchCategoriesBySportId(sport_id: number) {
         : null,
     }));
   } catch (error) {
-    console.error('❌ Failed to fetch pitch categories:', error.message);
+    console.error(' Failed to fetch pitch categories:', error.message);
     throw new InternalServerErrorException('Failed to fetch pitch categories');
   }
 }
