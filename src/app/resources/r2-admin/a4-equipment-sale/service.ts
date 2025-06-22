@@ -28,19 +28,42 @@ export class AdminEquipmentSaleService {
 
     async getData() { 
         try {
-            
-            const sale = await this.EquipmentPaymentModel.findAll({
+            const sales = await this.EquipmentPaymentModel.findAll({
                 include: ['equipment', 'user', 'payment'],
                 order: [['created_at', 'DESC']],
             });
-            return sale;
+
+            let totalSalesAmount = 0;
+            let totalQuantitySold = 0;
+
+            const formattedSales = sales.map(sale => {
+                const qty = sale.qty || 0;
+                const totalPrice = sale.total_price || 0;
+
+                totalSalesAmount += totalPrice;
+                totalQuantitySold += qty;
+
+                return sale;
+            });
+
+            const averageSalePrice = totalQuantitySold > 0
+                ? parseFloat((totalSalesAmount / totalQuantitySold).toFixed(2))
+                : 0;
+
+            return {
+                sales: formattedSales,
+                meta: {
+                    totalSalesAmount: parseFloat(totalSalesAmount.toFixed(2)),
+                    totalQuantitySold,
+                    averageSalePrice
+                }
+            };
 
         } catch (error) {
             console.error(error);
-            throw new BadRequestException(error.message); // Handle errors gracefully
+            throw new BadRequestException(error.message);
         }
     }
-    
     async create(body: any) {
         try {
             // Check if payment_id exists (if provided)
