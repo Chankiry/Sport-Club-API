@@ -86,7 +86,7 @@ export class ProfileService {
         let updateUser: User;
         try {
             updateUser = await User.findByPk(userId, {
-                attributes: ['id', 'name', 'avatar', 'phone', 'email', 'password'],
+                attributes: ['id', 'name', 'avatar', 'phone','phone2', 'email', 'password','is_active'],
                 include: [
                     {
                         model: UsersRole,
@@ -105,7 +105,7 @@ export class ProfileService {
 
         const user = await User.findOne({
             where: {id: updateUser.id},
-            attributes: ['id', 'name', 'email','phone', 'avatar']
+            attributes: ['id', 'name', 'email','phone','phone2', 'avatar','is_active']
         });
 
         const token: string = this._generateToken(updateUser);
