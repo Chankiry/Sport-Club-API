@@ -5,6 +5,7 @@ import { Routes } from '@nestjs/core';
 
 // ===>> Module
 import { UserBookingModule } from './u1-booking/module';
+import { UserEquipmentModule } from './u2-equipment/module';
 
 export const userRoutes: Routes = [
     {
@@ -13,6 +14,6 @@ export const userRoutes: Routes = [
     },
     {
         path: 'equipments',
-        module: UserBookingModule
+        module: UserEquipmentModule
     }
 ];

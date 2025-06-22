@@ -1,15 +1,24 @@
-// ===========================================================================>> Core Library
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from '@nestjs/sequelize';
 
-// ===========================================================================>> Third Party Library
+import EquipmentPayment from 'src/models/equiment/equitment_payment.model';
+import Equipment from 'src/models/equiment/equitments.model';
+import Payment from 'src/models/payment/payment.model';
+import User from 'src/models/user/user.model';
 
-
-// ===========================================================================>> Custom Library
 import { UserEquipmentController } from './controller';
-import { UserEquipmentService }    from './service';
+import { UserEquipmentService } from './service';
 
 @Module({
-    controllers: [UserEquipmentController],
-    providers: [UserEquipmentService]
+  imports: [
+    SequelizeModule.forFeature([
+      EquipmentPayment,
+      Equipment,
+      Payment,
+      User,
+    ]),
+  ],
+  controllers: [UserEquipmentController],
+  providers: [UserEquipmentService],
 })
-export class UserEquipmentModule { }
+export class UserEquipmentModule {}

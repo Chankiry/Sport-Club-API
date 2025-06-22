@@ -50,7 +50,7 @@ export class AdminPitchService {
     return categories.map((item) => ({
       id: item.id,
       name: item.name,
-      sport: item.sport?.name,
+  
     }));
   } catch (error) {
     throw new BadRequestException(error.message);
