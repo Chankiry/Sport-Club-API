@@ -1,5 +1,6 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import TimesModel from './times.model';
 
 // ================================================================>> Costom Library
 
@@ -10,13 +11,34 @@ class TimesType extends Model<TimesType> {
     id: number;
 
     @Column({ allowNull: true, type: DataType.STRING(100) })
-    from_time: string;
+    name: string;
 
-    @Column({ allowNull: true, type: DataType.STRING(100) })
-    to_time: string;
+    @ForeignKey(() => TimesModel)
+    @Column({ onDelete: 'CASCADE' })
+    from_time_id: number;
+
+    @ForeignKey(() => TimesModel)
+    @Column({ onDelete: 'CASCADE' })
+    to_time_id: number;
 
     @Column({ allowNull: true, type: DataType.DOUBLE, defaultValue: 0 })
     price_multiplier: number;
+
+    @Column({ allowNull: true, type: DataType.DOUBLE, defaultValue: 1 })
+    duration_in_hours: number;
+    
+    @Column({ allowNull: true, type: DataType.DATE })
+    created_at: Date;
+
+    @Column({ allowNull: true, type: DataType.DATE })
+    updated_at: Date;
+
+    // relation
+    @BelongsTo(() => TimesModel, { foreignKey: 'from_time_id', as: 'from_time' })                   
+    from_time: TimesModel;
+
+    @BelongsTo(() => TimesModel, { foreignKey: 'to_time_id', as: 'to_time' })                   
+    to_time: TimesModel;
 
 }
 

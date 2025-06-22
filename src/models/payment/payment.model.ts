@@ -1,11 +1,12 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany, BeforeCreate } from 'sequelize-typescript';
 import Booking from '../booking/bookings.model';
 import PaymentType from './payments_types.model';
 import DrinksPayment from '../drink/drink_payments.model';
 import EquipmentPayment from '../equiment/equitment_payment.model';
 import PaymentMethod from './payments_method.model';
 import PaymentStatus from './payments_status.model';
+import { PaymentTypeEnum } from '../../app/enums/user/paymentType.enum';
 
 // ================================================================>> Custom Library
 
@@ -64,6 +65,27 @@ class Payment extends Model<Payment> {
 
     @HasMany(() => EquipmentPayment)
     equipments_payments: EquipmentPayment[];
+
+    @BeforeCreate
+    static async assignUniqueCode(instance: Payment) {
+        const latestPayment = await Payment.findOne({ 
+            where: {type_id: instance.type_id},
+            order: [['id', 'DESC']] 
+        });
+
+        const id = latestPayment ? latestPayment.id + 1 : 0;
+        const paddedCounter = id.toString().padStart(4, '0');
+        if(instance.type_id == PaymentTypeEnum.Booking){
+            instance.receipt_number = `BK${paddedCounter}`;
+        }
+        else if(instance.type_id == PaymentTypeEnum.Drink){
+            instance.receipt_number = `DR${paddedCounter}`;
+        }
+        else if(instance.type_id == PaymentTypeEnum.Equiment){
+            instance.receipt_number = `EQ${paddedCounter}`;
+        }
+
+    }
     
 }
 

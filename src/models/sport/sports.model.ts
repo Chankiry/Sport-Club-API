@@ -1,5 +1,7 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import Pitches from '../pitch/pitches.model';
+import PitchesCategory from '../pitch/pitches_category.model';
 
 // ================================================================>> Costom Library
 
@@ -23,6 +25,9 @@ class Sports extends Model<Sports> {
 
     @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
+
+    @HasMany(() => PitchesCategory)
+    pitches_categories: PitchesCategory[];
 
 }
 

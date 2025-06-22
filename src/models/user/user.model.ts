@@ -1,10 +1,11 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, BelongsTo, ForeignKey, DataType } from 'sequelize-typescript';
+import { Model, Column, Table, BelongsTo, ForeignKey, DataType, HasMany, HasOne } from 'sequelize-typescript';
 
 // ================================================================>> Costom Library
 import UsersRole            from './role.model';
 import { UsersActiveEnum }  from '../../app/enums/user/active.enum';
 import * as bcrypt from 'bcryptjs';
+import Blacklist from './blacklists.model';
 
 @Table({ tableName: 'user', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class User extends Model<User> {
@@ -53,6 +54,9 @@ class User extends Model<User> {
 
     @BelongsTo(() => UsersRole)
     role: UsersRole;
+
+    @HasOne(() => Blacklist) // One-to-one: User has one Blacklist
+    blacklist: Blacklist;
 }
 
 export default User;

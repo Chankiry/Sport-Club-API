@@ -24,7 +24,7 @@ class Blacklist extends Model<Blacklist> {
 
     // Foreign Key for User model
     @ForeignKey(() => User)
-    @Column({ allowNull: true, type: DataType.INTEGER })
+    @Column({ allowNull: true, type: DataType.INTEGER, unique: true })
     user_id: number;
 
     @Column({ allowNull: true, type: DataType.DATE })
