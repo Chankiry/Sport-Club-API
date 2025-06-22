@@ -2,7 +2,7 @@
 import { IsEmail, IsNotEmpty, IsString, IsOptional , Matches, MinLength } from 'class-validator'
 import { IsBase64Image } from 'src/app/decorators/base64-image.decorator'
 
-export class UpdateProfileDto {
+export class UpdateUserDto {
     @IsString()
     @IsNotEmpty()
     name: string
@@ -10,27 +10,27 @@ export class UpdateProfileDto {
     @Matches(/^(\+855|0)[1-9]\d{7,8}$/, {
         message: 'Phone must be valit Cambodia phone number'
     })
+    @IsNotEmpty()
     phone: string
 
-    @IsEmail()
+    @IsString()
+    @IsNotEmpty()
     email: string
 
     @IsOptional()
     @IsString()
-    @IsBase64Image({ message: 'Invalid image format. Image must be base64 encoded JPEG or PNG.' })
-    avatar?: string
+    avatar: string
 }
 
 export class UpdatePasswordDto {
-    @MinLength(6)
-    @IsString()
-    current_password: string
 
     @MinLength(6)
     @IsString()
-    new_password: string
+    @IsNotEmpty()
+    password: string
 
     @MinLength(6)
     @IsString()
+    @IsNotEmpty()
     confirm_password: string
 }

@@ -6,11 +6,12 @@ import UserDecorator from 'src/app/decorators/user.decorator';
 
 //Custom Services and DTOs:
 import { ProfileService } from './profile.service';
-import { UpdatePasswordDto, UpdateProfileDto } from './profile.dto';
+import { UpdatePasswordDto, UpdateUserDto } from './profile.dto';
 
 // File Handling:
 import { FileService } from 'src/app/services/file.service';
 import User from 'src/models/user/user.model';
+import { UserDto } from '../auth/auth.dto';
 
 @Controller()
 export class ProfileController {
@@ -20,18 +21,14 @@ export class ProfileController {
     ) { };
 
     @Put('')
-    async update(@Body() body: UpdateProfileDto, @UserDecorator() user: User): Promise<{ data: { access_token: string, user: any }, message: string }> {
+    async update(@Body() body: UpdateUserDto, @UserDecorator() user: User): Promise<{ data: { access_token: string, user: any }, message: string }> {
         return await this.profileService.update(body, user.id);
     }
-
-    @Put('update-password')
-    @HttpCode(HttpStatus.OK)
-    async updatePassword(@Body() body: UpdatePasswordDto, @UserDecorator() user: User): Promise<{ message: string }> {
-        if (!(body.new_password === body.confirm_password)) {
-            throw new BadRequestException('New password and confirm password do not match');
-        }
-        // remove confirm_password from body
-        body.confirm_password = undefined;
-        return this.profileService.updatePassword(user.id, body);
+   
+    @Put('/update-password')
+    async updatePassword(@UserDecorator() auth: User, @Body() body: UpdatePasswordDto): Promise<{ message: string }> {
+        return await this.profileService.updatePassword(auth.id, body);
     }
+
+
 }
