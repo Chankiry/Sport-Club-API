@@ -7,18 +7,19 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 
 // ================================================================>> Costom Library
-import { UpdatePasswordDto, UpdateProfileDto } from './profile.dto';
+import { UpdatePasswordDto, UpdateUserDto } from './profile.dto';
 import User from 'src/models/user/user.model';
 import { jwtConstants } from 'src/app/shared/constants.jwt';
 import UsersRole from 'src/models/user/role.model';
 import { FileService } from 'src/app/services/file.service';
+import { UserDto } from '../auth/auth.dto';
 
 @Injectable()
 export class ProfileService {
 
     constructor(private readonly fileService: FileService) { };
 
-    async update(body: UpdateProfileDto, userId: number): Promise<{ data: { access_token: string, user: any }, message: string }> {
+    async update(body: UpdateUserDto, userId: number): Promise<{ data: { access_token: string, user: any }, message: string }> {
         //=============================================
         let currentUser: User;
         try {
@@ -107,7 +108,7 @@ export class ProfileService {
             attributes: ['id', 'name', 'email','phone', 'avatar']
         });
 
-        const token: string = this.generateToken(updateUser.id, updateUser.name, updateUser.email, updateUser.avatar, updateUser.phone, updateUser.role.name);
+        const token: string = this._generateToken(updateUser);
         return {
             data: {
                 access_token: token,
@@ -116,7 +117,6 @@ export class ProfileService {
             message: 'Your profile has been updated successfully.'
         }
     }
-
     async updatePassword(userId: number, body: UpdatePasswordDto): Promise<{ message: string }> {
         //=============================================
         let currentUser: User;
@@ -129,22 +129,13 @@ export class ProfileService {
             throw new BadRequestException('Invalid user_id');
         }
 
-        const isPasswordValid = await bcrypt.compare(body.current_password, currentUser.password);
-        if (!isPasswordValid) {
-            throw new BadRequestException('Invalid current password', 'Password Error');
+        if (body.password !== body.confirm_password) {
+            throw new BadRequestException('Passwords and Confirm password do not match');
         }
-
-        if (body.current_password === body.new_password) {
-            throw new BadRequestException('New password should not the same current password');
-        }
-
-        const passwordHash = await bcrypt.hash(body.new_password, 12);
-        body.new_password = passwordHash;
-
         //=============================================
         try {
             await User.update({
-                password: body.new_password
+                password: body.confirm_password,
             }, {
                 where: { id: userId }
             });
@@ -156,18 +147,14 @@ export class ProfileService {
         return { message: 'Password has been updated successfully.' };
     }
 
-    private generateToken(id: number, name: string, email: string, avatar: string, phone: string, role: string): string {
+
+    private _generateToken(user: User): string {
         return jwt.sign(
             {
-                user: {
-                    id: id,
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    avatar: avatar,
-                },
-                role: role
-            }, jwtConstants.secret,
+                user: new UserDto(user),
+                role: user.role.name
+            }, 
+            jwtConstants.secret,
             {
                 expiresIn: jwtConstants.expiresIn
             }
