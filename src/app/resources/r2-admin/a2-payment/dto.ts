@@ -1,9 +1,6 @@
 
 // ================================================================>> Core Library
-import { Optional } from '@nestjs/common';
-import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { BookingStatusEnum } from 'src/app/enums/user/BookingStatuses.enum';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 // ================================================================>> Costom Library
 
