@@ -41,7 +41,6 @@ class SportRating extends Model<SportRating> {
 
     @BelongsTo(() => Sports)
     sport: Sports;
-    avg_rating: string;
     
     @BelongsTo(() => User)
     user: User;

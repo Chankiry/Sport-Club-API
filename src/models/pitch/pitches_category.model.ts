@@ -1,6 +1,7 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import Sports from '../sport/sports.model';
+import Pitches from './pitches.model';
 
 // ================================================================>> Costom Library
 
@@ -29,9 +30,18 @@ class PitchesCategory extends Model<PitchesCategory> {
     @Column({ allowNull: true, type: DataType.DOUBLE, defaultValue: 0 })
     price: number;
 
-     // Associations (BelongsTo)
-     @BelongsTo(() => Sports)
-     sport: Sports;
+    @Column({ allowNull: true, type: DataType.DATE })
+    created_at: Date;
+
+    @Column({ allowNull: true, type: DataType.DATE })
+    updated_at: Date;
+
+    // Associations (BelongsTo)
+    @BelongsTo(() => Sports)
+    sport: Sports;
+
+    @HasMany(() => Pitches)                                                                            
+    pitches: Pitches[];
 
 }
 

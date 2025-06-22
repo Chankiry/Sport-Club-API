@@ -16,18 +16,18 @@ export class AdminTimeTypeController {
     return this.service.getData();
   }
 
-  @Post()
-  create(@Body() dto: CreateTimeTypeDto) {
-    return this.service.create(dto);
-  }
+  // @Post()
+  // create(@Body() dto: CreateTimeTypeDto) {
+  //   return this.service.create(dto);
+  // }
 
-  @Put(':id')
-  update(@Param('id') id: number, @Body() dto: UpdateTimeTypeDto) {
-    return this.service.update(id, dto);
-  }
+  // @Put(':id')
+  // update(@Param('id') id: number, @Body() dto: UpdateTimeTypeDto) {
+  //   return this.service.update(id, dto);
+  // }
 
-  @Delete(':id')
-  delete(@Param('id') id: number) {
-    return this.service.delete(id);
-  }
+  // @Delete(':id')
+  // delete(@Param('id') id: number) {
+  //   return this.service.delete(id);
+  // }
 }
