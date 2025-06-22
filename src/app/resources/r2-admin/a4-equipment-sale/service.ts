@@ -8,6 +8,9 @@ import { InjectModel } from '@nestjs/sequelize';
 import Equipment from 'src/models/equiment/equitments.model';
 import { CreateEquipmentsaleDTO } from './dto';
 import EquipmentPayment from 'src/models/equiment/equitment_payment.model';
+import Payment from 'src/models/payment/payment.model';
+import User from 'src/models/user/user.model';
+import PaymentMethod from 'src/models/payment/payments_method.model';
 
 
 // ===========================================================================>> Custom Library
@@ -22,7 +25,7 @@ export class AdminEquipmentSaleService {
         private readonly  EquipmentPaymentModel: typeof EquipmentPayment,) { }
  
     // ==================================================================>> Get data EquipmentSale
-    // @Get('admin/equipment-sale')
+
     async getData() { 
         try {
             
@@ -37,9 +40,16 @@ export class AdminEquipmentSaleService {
             throw new BadRequestException(error.message); // Handle errors gracefully
         }
     }
-
+    
     async create(body: any) {
         try {
+            // Check if payment_id exists (if provided)
+            if (body.payment_id) {
+                const payment = await Payment.findByPk(body.payment_id);
+                if (!payment) {
+                    throw new BadRequestException('Payment method not found.');
+                }
+            }
             const now =new Date();
             const created = await EquipmentPayment.create({
                 user_id: body.user_id,
@@ -60,6 +70,13 @@ export class AdminEquipmentSaleService {
 
     async update(id: string, body: Partial<CreateEquipmentsaleDTO>) {
         try {
+            // Check if payment_id exists (if provided)
+            if (body.payment_id) {
+                const payment = await Payment.findByPk(body.payment_id);
+                if (!payment) {
+                    throw new BadRequestException('Payment method not found.');
+                }
+            }
             const sale = await this.EquipmentPaymentModel.findByPk(id);
             if (!sale) {
                 throw new NotFoundException('Equipment not found');
@@ -92,5 +109,44 @@ export class AdminEquipmentSaleService {
             throw new BadRequestException('Failed to deleted equipment: ' + error.message);
         }
     }
+    async setupData() {
+        try {
+            // Fetch users
+            const users = await User.findAll({
+            attributes: ['id', 'name'],
+            order: [['name', 'ASC']]
+            });
+
+            // Fetch payments
+            const payments = await PaymentMethod.findAll({
+            attributes: ['id', 'name'],
+            order: [['id', 'ASC']]
+            });
+
+            // Fetch equipments
+            const equipments = await Equipment.findAll({
+            attributes: ['id', 'name'],
+            order: [['name', 'ASC']]
+            });
+
+            return {
+            users: users.map(u => ({
+                id: u.id,
+                name: u.name
+            })),
+            payments: payments.map(p => ({
+                id: p.id,
+                name: p.name
+            })),
+            equipments: equipments.map(e => ({
+                id: e.id,
+                name: e.name
+            })),
+            };
+        } catch (error) {
+            throw new BadRequestException('Failed to load setup data');
+        }
+        }
+
 
 }

@@ -2,6 +2,8 @@ import PaymentStatus from "../../../models/payment/payments_status.model";
 import PaymentMethod from "../../../models/payment/payments_method.model";
 import Payment from "../../../models/payment/payment.model";
 import PaymentType from "../../../models/payment/payments_types.model";
+import { PaymentTypeEnum } from "../../../app/enums/user/paymentType.enum";
+import { PaymentStatusEnum } from "../../../app/enums/user/paymentStatus.enum";
 const now = new Date();
 export class PaymentSeeder {
 
@@ -37,18 +39,21 @@ export class PaymentSeeder {
 const paymentData = {
     PaymentStatuses: [
         {
+            id: PaymentStatusEnum.Completed,
             name: 'Completed',
             color: '#1BE125',
             created_at: now,
             updated_at: now,
         }, 
         {
+            id: PaymentStatusEnum.Pending,
             name: 'Pending',
             color: '#DAE11B',
             created_at: now,
             updated_at: now,
         },
         {
+            id: PaymentStatusEnum.Fail,
             name: 'Fail',
             color: '#E12B1B',
             created_at: now,
@@ -74,16 +79,19 @@ const paymentData = {
     ],
     paymentTypes: [
         {
+            id: PaymentTypeEnum.Booking,
             name: 'booking',
             created_at: now,
             updated_at: now,
         }, 
         {
+            id: PaymentTypeEnum.Drink,
             name: 'drink',
             created_at: now,
             updated_at: now,
         },
         {
+            id: PaymentTypeEnum.Equiment,
             name: 'equiment',
             created_at: now,
             updated_at: now,

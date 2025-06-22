@@ -17,6 +17,10 @@ export class AdminEquipmentSaleController {
     async getData(): Promise<any> {
         return await this._service.getData();
     }
+    @Get('setup')
+    async getSetupData() {
+    return await this._service.setupData();
+    }
 
     @Post()
     async create(

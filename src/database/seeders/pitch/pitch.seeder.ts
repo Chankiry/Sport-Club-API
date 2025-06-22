@@ -2,6 +2,8 @@ import Pitches from "../../../models/pitch/pitches.model";
 import PitchesCategory from "../../../models/pitch/pitches_category.model";
 import TimesType from "../../../models/pitch/times_type.model";
 import DatesType from "../../../models/pitch/dates_type.model";
+import TimesModel from "../../../models/pitch/times.model";
+import DaysModel from "../../../models/pitch/days.model";
 const now = new Date();
 export class PitchSeeder {
 
@@ -17,6 +19,20 @@ export class PitchSeeder {
             console.log('\x1b[32m\nSeed pitch inserted successfully.');
         } catch (error) {
             console.error('Error seeding orders:', error);
+        }
+        try {
+            await TimesModel.bulkCreate(pitchSeeder.times);
+            console.log('\x1b[32m\nSeed times inserted successfully.');
+            
+        } catch (error) {
+            console.error('Error seeding times:', error);
+        }
+        try {
+            await DaysModel.bulkCreate(pitchSeeder.days);
+            console.log('\x1b[32m\nSeed days inserted successfully.');
+            
+        } catch (error) {
+            console.error('Error seeding days:', error);
         }
         try {
             await TimesType.bulkCreate(pitchSeeder.times_type);
@@ -188,102 +204,115 @@ const pitchSeeder = {
             updated_at: now,
         }
     ],
-    times_type: [
+    times: [
         {
-            from_time: '08:00',
-            to_time: '9:00',
-            price_multiplier: 1,
+            name: '6:00',
         },
         {
-            from_time: '9:00',
-            to_time: '10:00',
-            price_multiplier: 1,
+            name: '7:00',
         },
         {
-            from_time: '10:00',
-            to_time: '11:00',
-            price_multiplier: 1,
+            name: '8:00',
         },
         {
-            from_time: '11:00',
-            to_time: '12:00',
-            price_multiplier: 1,
+            name: '9:00',
         },
         {
-            from_time: '12:00',
-            to_time: '13:00',
-            price_multiplier: 1,
+            name: '10:00',
         },
         {
-            from_time: '13:00',
-            to_time: '14:00',
-            price_multiplier: 1,
+            name: '11:00',
         },
         {
-            from_time: '15:00',
-            to_time: '16:00',
-            price_multiplier: 1,
+            name: '12:00',
         },
         {
-            from_time: '16:00',
-            to_time: '17:00',
-            price_multiplier: 1.2,
+            name: '13:00',
         },
         {
-            from_time: '17:00',
-            to_time: '18:00',
-            price_multiplier: 1.2,
+            name: '14:00',
         },
         {
-            from_time: '18:00',
-            to_time: '19:00',
-            price_multiplier: 1.4,
+            name: '15:00',
         },
         {
-            from_time: '19:00',
-            to_time: '20:00',
-            price_multiplier: 1.4,
+            name: '16:00',
         },
         {
-            from_time: '20:00',
-            to_time: '21:00',
-            price_multiplier: 1.4,
+            name: '17:00',
         },
         {
-            from_time: '21:00',
-            to_time: '22:00',
-            price_multiplier: 1.4,
+            name: '18:00',
+        },
+        {
+            name: '19:00',
+        },
+        {
+            name: '20:00',
+        },
+        {
+            name: '21:00',
+        },
+        {
+            name: '22:00',
         },
 
     ],
+    days: [
+        {
+            name: 'Monday',
+        },
+        {
+            name: 'Tuesday',
+        },
+        {
+            name: 'Wednesday',
+        },
+        {
+            name: 'Thursday',
+        },
+        {
+            name: 'Friday',
+        },
+        {
+            name: 'Saturday',
+        },
+        {
+            name: 'Sunday',
+        },
+    ],
+    times_type: [
+        {
+            name: 'Off-Peak',
+            from_time_id: 1,
+            to_time_id: 4,
+            price_multiplier: 0.8
+        },
+        {
+            name: 'Regular',
+            from_time_id: 5,
+            to_time_id: 12,
+            price_multiplier: 1
+        },
+        {
+            name: 'Peak',
+            from_time_id: 13,
+            to_time_id: 16,
+            price_multiplier: 1.2
+        },
+    ],
     dates_type: [
         {
-            day: 'Monday',
-            price_multiplier: 1,
+            name: 'Weekday',
+            from_day_id: 1,
+            to_day_id: 5,
+            price_multiplier: 1
         },
         {
-            day: 'Tuesday',
-            price_multiplier: 1,
-        },
-        {
-            day: 'Wednesday',
-            price_multiplier: 1,
-        },
-        {
-            day: 'Thursday',
-            price_multiplier: 1,
-        },
-        {
-            day: 'Friday',
-            price_multiplier: 1,
-        },
-        {
-            day: 'Saturday',
-            price_multiplier: 1.2,
-        },
-        {
-            day: 'Sunday',
-            price_multiplier: 1.2,
+            name: 'Weekend',
+            from_day_id: 6,
+            to_day_id: 7,
+            price_multiplier: 1.2
         },
     ]
 

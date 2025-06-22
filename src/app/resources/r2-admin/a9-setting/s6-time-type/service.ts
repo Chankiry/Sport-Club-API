@@ -25,19 +25,19 @@ export class AdminTimeTypeService {
     return await this.timesTypeRepo.findAll();
   }
 
-  async create(dto: CreateTimeTypeDto) {
-    return await this.timesTypeRepo.create(dto);
-  }
+  // async create(dto: CreateTimeTypeDto) {
+  //   return await this.timesTypeRepo.create(dto);
+  // }
 
-  async update(id: number, dto: UpdateTimeTypeDto) {
-    const record = await this.timesTypeRepo.findByPk(id);
-    if (!record) throw new NotFoundException('TimeType not found');
-    return await record.update(dto);
-  }
+  // async update(id: number, dto: UpdateTimeTypeDto) {
+  //   const record = await this.timesTypeRepo.findByPk(id);
+  //   if (!record) throw new NotFoundException('TimeType not found');
+  //   return await record.update(dto);
+  // }
 
-  async delete(id: number) {
-    const record = await this.timesTypeRepo.findByPk(id);
-    if (!record) throw new NotFoundException('TimeType not found');
-    return await record.destroy();
-  }
+  // async delete(id: number) {
+  //   const record = await this.timesTypeRepo.findByPk(id);
+  //   if (!record) throw new NotFoundException('TimeType not found');
+  //   return await record.destroy();
+  // }
 }
