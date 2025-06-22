@@ -1,6 +1,7 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import Sports from '../sport/sports.model';
+import EquipmentPayment from './equitment_payment.model';
 
 // ================================================================>> Custom Library
 
@@ -33,6 +34,10 @@ class Equipment extends Model<Equipment> {
 
     @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
+
+
+    @HasMany(() => EquipmentPayment)
+    payments: EquipmentPayment[];
 
     // Associations (BelongsTo)
     @BelongsTo(() => Sports)

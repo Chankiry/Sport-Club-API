@@ -54,7 +54,6 @@ export class AdminBookingController {
         @Param('id') id: number,
         @Body() body: CreateUpdateBookingDTO
     ): Promise<any> {
-        console.log(body)
         return await this._service.update(Number(id), body);
     }
 

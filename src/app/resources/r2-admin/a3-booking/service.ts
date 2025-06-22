@@ -614,8 +614,9 @@ export class AdminBookingService {
             });
 
             const whereClauseBookeds: any = {
-                ...({ date : { [Op.between]: [start_date, end_date] } }),
-                ...(pitch_id && { pitch_id : pitch_id }),
+                ...({   date : { [Op.between]: [start_date, end_date] } }),
+                ...(    pitch_id && { pitch_id : pitch_id }),
+                ...( { status_id : { [Op.not]: BookingStatusEnum.Cancelled} }),
             }
             const bookeds = await Booking.findAll({
                 where: whereClauseBookeds

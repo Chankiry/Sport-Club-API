@@ -16,6 +16,10 @@ import Drink from 'src/models/drink/drinks.model';
 import DrinksPayment from 'src/models/drink/drink_payments.model';
 import PaymentMethod from 'src/models/payment/payments_method.model';
 import { PaymentStatusEnum } from 'src/app/enums/user/paymentStatus.enum';
+import BookingStatus from 'src/models/booking/booking_status.model';
+import TimesModel from 'src/models/pitch/times.model';
+import Blacklist from 'src/models/user/blacklists.model';
+import Sports from 'src/models/sport/sports.model';
 
 
 // ===========================================================================>> Custom Library
@@ -26,13 +30,15 @@ import { PaymentStatusEnum } from 'src/app/enums/user/paymentStatus.enum';
 @Injectable()
 export class AdminPaymentService {
     // ==================================================================>> Get data Payment
-    async getData(filters?: {
-        user_id?: number;
-        status_id?: number;
-        method_id?: number;
-        page?: number;
-        limit?: number;
-    }) { 
+    async getData(
+        filters?: {
+            user_id?: number;
+            status_id?: number;
+            method_id?: number;
+            page?: number;
+            limit?: number;
+        }
+    ) { 
         try {
             const page = filters?.page || 1;
             const limit = filters?.limit || 10;
@@ -138,6 +144,93 @@ export class AdminPaymentService {
         }
     }
 
+    async dataSetup() { 
+        try {
+
+            const users = await User.findAll({
+                attributes: ['id', 'name', 'email', 'phone', 'phone2'],
+                include: [
+                    {
+                    model: Blacklist,
+                    required: false, // LEFT JOIN
+                    },
+                ],
+                where: {
+                    '$blacklist.id$': null, // Only users without a blacklist
+                },
+            });
+
+            const booking_statuses = await BookingStatus.findAll({
+                attributes: ['id', 'name', 'icon', 'color']
+            })
+
+            const payment_statuses = await PaymentStatus.findAll({
+                attributes: ['id', 'name', 'color']
+            })
+
+            const payment_methods = await PaymentMethod.findAll({
+                attributes: ['id', 'name']
+            })
+
+            
+            return {
+                data:{
+                    booking_statuses,
+                    payment_statuses,
+                    payment_methods,
+                    users,
+                }
+            };
+
+        } catch (error) {
+            console.error(error);
+            throw new BadRequestException(error.message);
+        }
+    }
+
+    async view(id: number) {
+        try{
+
+            const payment = await Payment.findOne({
+                where: {id},
+                attributes: ['id', 'receipt_number', 'booking_id', 'status_id', 'method_id', 'type_id', 'total_price', 'created_at', 'updated_at'],
+                include: [
+                    {
+                        model: PaymentStatus,
+                        attributes: ['id', 'name', 'color'],
+                    },
+                    {
+                        model: Booking,
+                        attributes: ['id'],
+                        include: [
+                            {
+                                model: User,
+                                attributes: ['id', 'name', 'avatar']
+                            }
+                        ]
+                    },
+                    {
+                        model: DrinksPayment,
+                        attributes: ['id', 'drink_id', 'booking_id', 'qty', 'total_price'],
+                        include: [
+                            {
+                                model: Drink,
+                                attributes: ['id', 'name', 'image', 'price']
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            return {
+                data: payment
+            }
+
+        } catch (error) {
+            console.error(error);
+            throw new BadRequestException(error.message);
+        }
+    }
 
     async update( id: number, body: UpdatePaymentDTO ) { 
         const sequelize = new Sequelize(sequelizeConfig);
