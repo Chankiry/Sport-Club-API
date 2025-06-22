@@ -17,15 +17,15 @@ export class AdminUserController {
         @Query('key') key?: string,
         @Query('role_id') role_id?: number,
         @Query('is_active') is_active?: number,
-        @Query('page') page?: number,
-        @Query('limit') limit?: number,
+        // @Query('page') page?: number,
+        // @Query('limit') limit?: number,
     ): Promise<any> {
         const filters = {
             key,
             role_id: role_id ? Number(role_id) : undefined,
             is_active: is_active !== undefined ? Number(is_active) : undefined,
-            page: page ? Number(page) : 1,
-            limit: limit ? Number(limit) : 10
+            // page: page ? Number(page) : 1,
+            // limit: limit ? Number(limit) : 10
         };
         return await this._service.getData(filters);
     }

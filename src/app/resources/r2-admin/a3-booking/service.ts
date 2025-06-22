@@ -5,7 +5,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Op, Sequelize, Transaction }       from 'sequelize';
 import * as moment  from 'moment';
 import Booking from 'src/models/booking/bookings.model';
-import { CreateBookingDTO } from './dto';
+import { CreateUpdateBookingDTO } from './dto';
 import sequelizeConfig from 'src/config/sequelize.config';
 import Pitches from 'src/models/pitch/pitches.model';
 import User from 'src/models/user/user.model';
@@ -186,7 +186,7 @@ export class AdminBookingService {
         }
     }
 
-    async create( body: CreateBookingDTO ) { 
+    async create( body: CreateUpdateBookingDTO ) { 
         const sequelize = new Sequelize(sequelizeConfig);
         let transaction: Transaction;
         try {
@@ -205,7 +205,6 @@ export class AdminBookingService {
                 ]
             });
             if (!pitch) {
-                await transaction.rollback();
                 throw new BadRequestException('Incorrect pitch!')
             }
 
@@ -355,7 +354,7 @@ export class AdminBookingService {
         }
     }
 
-    async update(id: number, body: CreateBookingDTO ) { 
+    async update(id: number, body: CreateUpdateBookingDTO ) { 
         const sequelize = new Sequelize(sequelizeConfig);
         let transaction: Transaction;
         try {
@@ -460,6 +459,29 @@ export class AdminBookingService {
             if(!newBooking){
                 throw new BadRequestException("Can't create booking!")
             }
+
+            const updated_booking = await Booking.findOne({
+                where: {id},
+                include: [
+                    {
+                        model: Payment
+                    }
+                ]
+            })
+
+            const payment = await Payment.update(
+                {
+                    total_price: updated_booking.price
+                },
+                {
+                    where: {id: updated_booking.payment.id},
+                    transaction
+                }
+            )
+            
+            if(!payment){
+                throw new BadRequestException("Fail to create payment!")
+            }
             
 
             await transaction.commit();
@@ -503,7 +525,8 @@ export class AdminBookingService {
 
             return {
                 data: {
-                    booking: result
+                    booking: result,
+                    payment
                 }
             };
 

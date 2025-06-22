@@ -1,5 +1,6 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, HasMany } from 'sequelize-typescript';
+import Payment from './payment.model';
 
 @Table({ tableName: 'payments_status', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
 class PaymentStatus extends Model<PaymentStatus> {
@@ -18,6 +19,9 @@ class PaymentStatus extends Model<PaymentStatus> {
 
     @Column({ allowNull: true, type: DataType.DATE })
     updated_at: Date;
+    
+    @HasMany(() => Payment)
+    payments: Payment[];
 }
 
 export default PaymentStatus;

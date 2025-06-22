@@ -1,5 +1,5 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany, BeforeCreate } from 'sequelize-typescript';
+import { Model, Column, Table, DataType, ForeignKey, BelongsTo, HasMany, BeforeCreate, HasOne } from 'sequelize-typescript';
 import Booking from '../booking/bookings.model';
 import PaymentType from './payments_types.model';
 import DrinksPayment from '../drink/drink_payments.model';
@@ -63,8 +63,8 @@ class Payment extends Model<Payment> {
     @HasMany(() => DrinksPayment)
     drinks_payments: DrinksPayment[];
 
-    @HasMany(() => EquipmentPayment)
-    equipments_payments: EquipmentPayment[];
+    @HasOne(() => EquipmentPayment)
+    equipments_payment: EquipmentPayment;
 
     @BeforeCreate
     static async assignUniqueCode(instance: Payment) {

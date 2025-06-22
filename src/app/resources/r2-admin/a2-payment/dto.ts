@@ -7,51 +7,29 @@ import { BookingStatusEnum } from 'src/app/enums/user/BookingStatuses.enum';
 
 // ================================================================>> Costom Library
 
-export class CreateUpdateBookingDTO {
+export class UpdatePaymentDTO {
 
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
-    phone: string;
+    status_id: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    method_id: number;
     
-    @Optional()
-    phone2: string;
+}
+
+export class CreateUpdateDrinkPaymentDTO {
+
+    @IsNumber()
+    @IsNotEmpty()
+    drink_id: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    qty: number = 1;
     
     @IsNumber()
     @IsNotEmpty()
-    pitch_id: number;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    user_id: number;
-    
-    @IsNotEmpty()
-    @Type(() => Date)
-    @IsDate()
-    date: Date;
-    
-    @IsNumber()
-    @Optional()
-    date_type_id: number = 1;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    booking_status_id: number = BookingStatusEnum.Pending;
-    
-    @IsNumber()
-    @Optional()
-    time_type_id: number = 1;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    time_id: number;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    duration_in_hours: number = 2;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    price: number = 0;
-    
-    
+    total_price: number = 0;
 }

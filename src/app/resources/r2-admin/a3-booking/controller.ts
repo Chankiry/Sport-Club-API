@@ -5,7 +5,7 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 // ===========================================================================>> Custom Library
 import { AdminBookingService } from './service';
-import { CreateBookingDTO } from './dto';
+import { CreateUpdateBookingDTO } from './dto';
 
 @Controller()
 export class AdminBookingController {
@@ -43,7 +43,7 @@ export class AdminBookingController {
 
     @Post()
     async create(
-        @Body() body: CreateBookingDTO
+        @Body() body: CreateUpdateBookingDTO
     ): Promise<any> {
         console.log(body)
         return await this._service.create(body);
@@ -52,7 +52,7 @@ export class AdminBookingController {
     @Post(':id')
     async update(
         @Param('id') id: number,
-        @Body() body: CreateBookingDTO
+        @Body() body: CreateUpdateBookingDTO
     ): Promise<any> {
         console.log(body)
         return await this._service.update(Number(id), body);

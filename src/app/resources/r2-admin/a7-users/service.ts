@@ -47,13 +47,13 @@ export class AdminUserService {
         key?: string;
         role_id?: number;
         is_active?: number;
-        page?: number;
-        limit?: number;
+        // page?: number;
+        // limit?: number;
     }) { 
         try {
-            const page = filters?.page || 1;
-            const limit = filters?.limit || 10;
-            const offset = (page - 1) * limit;
+            // const page = filters?.page || 1;
+            // const limit = filters?.limit || 10;
+            // const offset = (page - 1) * limit;
 
             const start_month = new Date(moment().startOf('month').format('YYYY-MM-DD'))
             const end_month = new Date(moment().endOf('month').format('YYYY-MM-DD'))
@@ -84,8 +84,8 @@ export class AdminUserService {
                         attributes: ['id', 'name'],
                     }
                 ],
-                limit,
-                offset,
+                // limit,
+                // offset,
                 order: [['created_at', 'DESC']]
             });
 
@@ -111,12 +111,12 @@ export class AdminUserService {
                     total_inactive_users,
                     users
                 },
-                pagination: {
-                    total: count,
-                    page,
-                    limit,
-                    totalPages: Math.ceil(count / limit)
-                }
+                // pagination: {
+                //     total: count,
+                //     page,
+                //     limit,
+                //     totalPages: Math.ceil(count / limit)
+                // }
             };
 
         } catch (error) {
