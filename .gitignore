@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Temp
 /temp
+# Local database files (e.g., PostgreSQL)
+db/
+db/
