@@ -6,6 +6,8 @@ import { Op, Sequelize }       from 'sequelize';
 import * as moment  from 'moment';
 import Pitches from 'src/models/pitch/pitches.model';
 import { CreatePitchDto, UpdatePitchDto } from './dto';
+import { InjectModel } from '@nestjs/sequelize';
+import PitchesCategory from 'src/models/pitch/pitches_category.model';
 
 
 // ===========================================================================>> Custom Library
@@ -14,6 +16,10 @@ import { CreatePitchDto, UpdatePitchDto } from './dto';
 
 @Injectable()
 export class AdminPitchService {
+  constructor(
+    @InjectModel(PitchesCategory)
+    private readonly model: typeof PitchesCategory
+  ) {}
   async getData(): Promise<Pitches[]> {
     return await Pitches.findAll({ order: [['created_at', 'DESC']] });
   }
@@ -38,4 +44,18 @@ export class AdminPitchService {
     await pitch.destroy();
     return { message: 'Pitch deleted successfully' };
   }
+   async setupData() {
+  try {
+    const categories = await this.model.findAll({ include: ['sport'] });
+    return categories.map((item) => ({
+      id: item.id,
+      name: item.name,
+      sport: item.sport?.name,
+    }));
+  } catch (error) {
+    throw new BadRequestException(error.message);
+  }
+}
+
+
 }

@@ -15,6 +15,10 @@ export class AdminPitchController {
   async getAll() {
     return await this._service.getData();
   }
+    @Get('setup-data')
+  async setupData() {
+    return await this._service.setupData();
+  }
 
   @Get(':id')
   async getOne(@Param('id', ParseIntPipe) id: number) {
