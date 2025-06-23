@@ -41,7 +41,6 @@ export class AdminBlackListController {
   
     @Post()
     async create(@Body() dto: CreateBlacklistDto) {
-    console.log('Creating blacklist entry with data:', dto);
     return await this._service.create(dto);
     }
 

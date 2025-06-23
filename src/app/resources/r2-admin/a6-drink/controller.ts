@@ -22,7 +22,6 @@ export class AdminDrinkController {
     async create(
       @Body()  body: CreateDrinkDTO
     ): Promise<any> {
-        console.log(body)
         return await this._service.create(body);
     }
 
@@ -31,7 +30,6 @@ export class AdminDrinkController {
         @Param('id') id: number,
         @Body()  body: CreateDrinkDTO
     ): Promise<any> {
-        console.log(id);
 
         return await this._service.update(id, body);
     }
@@ -40,7 +38,6 @@ export class AdminDrinkController {
     async delete(
         @Param('id') id: number
     ): Promise<any> {
-        console.log(id);
         return await this._service.delete(id);
     }
     

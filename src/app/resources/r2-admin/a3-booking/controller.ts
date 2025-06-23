@@ -45,7 +45,6 @@ export class AdminBookingController {
     async create(
         @Body() body: CreateUpdateBookingDTO
     ): Promise<any> {
-        console.log(body)
         return await this._service.create(body);
     }
 
