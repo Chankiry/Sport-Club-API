@@ -19,7 +19,7 @@ const bootstrap = async () => {
 
     /** @EnableCORS */
     app.use(cors({
-        origin: 'http://localhost:5173', // Allow requests from this origin
+        origin: true, // Allow requests from this origin
         credentials: true, // Allow credentials (cookies, authorization headers)
       }));
 
