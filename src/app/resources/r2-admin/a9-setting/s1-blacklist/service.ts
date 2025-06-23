@@ -103,12 +103,10 @@ export class AdminBlackListService {
   const item = await Blacklist.findByPk(id, {
     raw: false, 
   });
-  console.log(item)
 
   if (!item) throw new NotFoundException('Blacklist entry not found');
 
   const updated = await item.update(data); 
-  console.log(data)
   return {
     data: updated,
     message: 'Blacklist entry updated successfully.',

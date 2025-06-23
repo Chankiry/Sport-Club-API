@@ -113,23 +113,17 @@ export class AdminPaymentService {
                 };
             });
 
-            const total_revenue = await Payment.findAll({
-                where:{
-                    status_id: PaymentStatusEnum.Completed
-                }
-            })
-
-            const total_pending = await Payment.findAll({
-                where:{
-                    status_id: PaymentStatusEnum.Pending
-                }
-            })
-
-            const total_fail = await Payment.findAll({
-                where:{
-                    status_id: PaymentStatusEnum.Fail
-                }
-            })
+            const [total_revenue, total_pending, total_fail] = await Promise.all([
+                Payment.sum('total_price', {
+                    where: { status_id: PaymentStatusEnum.Completed, type_id: PaymentTypeEnum.Booking }
+                }),
+                Payment.sum('total_price', {
+                    where: { status_id: PaymentStatusEnum.Pending, type_id: PaymentTypeEnum.Booking }
+                }),
+                Payment.sum('total_price', {
+                    where: { status_id: PaymentStatusEnum.Fail, type_id: PaymentTypeEnum.Booking }
+                })
+            ]);
 
             return {
                 data: {
@@ -329,7 +323,7 @@ export class AdminPaymentService {
                     drink_id: body.drink_id,
                     qty: body.qty,
                     total_price: body.total_price,
-                    payment_id: payment.id,
+                    payment_id,
                     booking_id: payment.booking_id
                 },
                 {
@@ -343,12 +337,11 @@ export class AdminPaymentService {
             }
 
             const price_drinks = await DrinksPayment.findAll({
-                where: { payment_id }
+                where: { payment_id: payment_id }
             });
 
             // Sum up all the prices
-            const total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + payment.booking.price;
-            console.log(total_price)
+            const total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + drink_payment.total_price + payment.booking.price;
             await Payment.update(
                 {
                     total_price
@@ -405,9 +398,9 @@ export class AdminPaymentService {
                 throw new BadRequestException('Quantity must be bigger than 0!')
             }
 
-            // body.total_price = drink.price * body.qty 
+            // body.total_price = drink.price * body.qty;
 
-            const drink_payment = await DrinksPayment.update(
+            const drink_payment: any = await DrinksPayment.update(
                 {
                     drink_id: body.drink_id,
                     qty: body.qty,
@@ -415,6 +408,7 @@ export class AdminPaymentService {
                 },
                 {
                     where: {id},
+                    returning: true,
                     transaction
                 }
             )
@@ -424,11 +418,11 @@ export class AdminPaymentService {
             }
 
             const price_drinks = await DrinksPayment.findAll({
-                where: { payment_id:  drinkPayment.payment_id}
+                where: {id: {[Op.not]: id}, payment_id:  drinkPayment.payment_id}
             });
 
             // Sum up all the prices
-            const total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + drinkPayment.payment.booking.price;
+            const total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + body.total_price + drinkPayment.payment.booking.price;
             
             const payment = await Payment.update(
                 {
