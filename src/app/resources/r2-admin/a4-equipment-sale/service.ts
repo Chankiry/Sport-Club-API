@@ -73,23 +73,34 @@ export class AdminEquipmentSaleService {
                     throw new BadRequestException('Payment method not found.');
                 }
             }
-            const now =new Date();
+
+            // Fetch equipment to get its price
+            const equipment = await Equipment.findByPk(body.equipments_id);
+            if (!equipment) {
+                throw new BadRequestException('Equipment not found.');
+            }
+
+            const total_price = equipment.price * (body.qty || 1);
+            const now = new Date();
+
             const created = await EquipmentPayment.create({
                 user_id: body.user_id,
                 equipments_id: body.equipments_id,
                 qty: body.qty,
                 payment_id: body.payment_id,
-                total_price: body.total_price,
+                total_price,
                 created_at: now,
                 updated_at: now,
-
             });
+
+            // Add total_price to the response (Sequelize returns it anyway)
             return created;
         } catch (error) {
             console.error(error);
             throw new BadRequestException('Failed to create equipment: ' + error.message);
         }
     }
+
 
     async update(id: string, body: Partial<CreateEquipmentsaleDTO>) {
         try {
@@ -100,22 +111,38 @@ export class AdminEquipmentSaleService {
                     throw new BadRequestException('Payment method not found.');
                 }
             }
+
             const sale = await this.EquipmentPaymentModel.findByPk(id);
             if (!sale) {
                 throw new NotFoundException('Equipment not found');
             }
+
+            // Use existing or new equipment/qty values
+            const equipmentId = body.equipments_id || sale.equipments_id;
+            const qty = body.qty || sale.qty;
+
+            // Fetch equipment to get its price
+            const equipment = await Equipment.findByPk(equipmentId);
+            if (!equipment) {
+                throw new BadRequestException('Equipment not found.');
+            }
+
+            const total_price = equipment.price * qty;
+
             await sale.update({
-                user_id: body.user_id,
-                equipments_id: body.equipments_id,
-                qty: body.qty,
-                payment_id: body.payment_id,
-                total_price: body.total_price,
+                user_id: body.user_id !== undefined ? body.user_id : sale.user_id,
+                equipments_id: equipmentId,
+                qty: qty,
+                payment_id: body.payment_id !== undefined ? body.payment_id : sale.payment_id,
+                total_price: total_price,
                 updated_at: new Date(),
             });
+
+            // Return the updated sale, including total_price
             return sale;
-        }   catch (error) {
+        } catch (error) {
             console.error(error);
-            throw new BadRequestException('Failed to update equipment' + error.message);
+            throw new BadRequestException('Failed to update equipment: ' + error.message);
         }
     }
 
