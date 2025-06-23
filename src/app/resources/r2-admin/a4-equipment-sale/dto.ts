@@ -16,6 +16,5 @@ export class CreateEquipmentsaleDTO {
   @IsNumber()
   payment_id?: number;
 
-  @IsNumber()
-  total_price: number;
+
 }
