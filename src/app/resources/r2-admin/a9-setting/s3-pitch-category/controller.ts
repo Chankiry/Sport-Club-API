@@ -29,13 +29,11 @@ export class AdminPitchCategoryController {
     @Param('id') id: number,
     @Body() body: CreatePitchCategoryDto
   ): Promise<any> {
-    console.log(id);
     return await this._service.update(id, body);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<any> {
-    console.log(id);
     return await this._service.delete(id);
   }
   @Get('setup')

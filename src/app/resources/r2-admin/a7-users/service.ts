@@ -237,7 +237,6 @@ export class AdminUserService {
                     }
                     // Replace base64 string with file URI from FileService
                     body.avatar = result.file?.uri;
-                    console.log(result)
                 } else {
                     await transaction.rollback();
                     throw new BadRequestException('រូបភាពត្រួវតែជា base64');
@@ -245,7 +244,6 @@ export class AdminUserService {
             }
             else{
                 body.avatar = user.avatar;
-                console.log(body.avatar)
             }
             
             const newUser = await User.update(

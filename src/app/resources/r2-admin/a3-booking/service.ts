@@ -636,7 +636,6 @@ export class AdminBookingService {
 
             // Assume `bookeds` is the result from Booking.findAll()
             const bookedTimeIds = new Set(bookeds.map(booking => booking.time_id ));
-            console.log(bookedTimeIds)
             const updatedTimes = filteredTimes.map(time => ({
                 ...time.toJSON(),
                 booked: bookedTimeIds.has(time.id),
