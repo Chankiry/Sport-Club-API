@@ -14,8 +14,8 @@ export class AdminEquipmentSaleController {
     { }
 
     @Get()
-    async getData(): Promise<any> {
-        return await this._service.getData();
+    async getData(@Query('user_id') user_id?: number): Promise<any> {
+        return await this._service.getData(user_id);
     }
     @Get('setup')
     async getSetupData() {

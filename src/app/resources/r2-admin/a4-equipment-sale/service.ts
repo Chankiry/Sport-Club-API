@@ -26,9 +26,17 @@ export class AdminEquipmentSaleService {
  
     // ==================================================================>> Get data EquipmentSale
 
-    async getData() { 
+    async getData(user_id?: number) { 
         try {
+            const where: any = {};
+
+            // Apply user_id filter if provided
+            if (user_id) {
+                where.user_id = user_id;
+            }
+
             const sales = await this.EquipmentPaymentModel.findAll({
+                where,
                 include: ['equipment', 'user', 'payment'],
                 order: [['created_at', 'DESC']],
             });
