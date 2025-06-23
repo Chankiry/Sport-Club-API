@@ -33,6 +33,12 @@ export class AdminPaymentController {
         return await this._service.getData(filters);
     }
 
+    @Get('data-setup')
+    async dataSetup(
+    ): Promise<any> {
+        return await this._service.dataSetup();
+    }
+
     @Get(':id')
     async view(
         @Param('id') id: number

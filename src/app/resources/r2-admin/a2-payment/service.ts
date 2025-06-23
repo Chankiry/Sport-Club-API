@@ -47,10 +47,12 @@ export class AdminPaymentService {
             // Build where conditions
             const whereConditions: any = {
                 ...({ type_id : PaymentTypeEnum.Booking }),
-                ...(filters.user_id && { user_id : filters.user_id }),
                 ...(filters.status_id && { status_id : filters.status_id }),
-                ...(filters.method_id && { user_id : filters.method_id }),
-                ...(filters.method_id && { user_id : filters.method_id }),
+                ...(filters.method_id && { method_id : filters.method_id }),
+            };
+
+            const whereClauseBooking: any = {
+                ...(filters.user_id && { user_id : filters.user_id }),
             };
             
             const payments = await Payment.findAll({
@@ -62,7 +64,13 @@ export class AdminPaymentService {
                         attributes: ['id', 'name', 'color'],
                     },
                     {
+                        model: PaymentMethod,
+                        required: false,
+                        attributes: ['id', 'name'],
+                    },
+                    {
                         model: Booking,
+                        where: whereClauseBooking,
                         attributes: ['id'],
                         include: [
                             {
@@ -85,6 +93,7 @@ export class AdminPaymentService {
                 include: [
                     {
                         model: Payment,
+                        required: false,
                         where:{status_id: PaymentStatusEnum.Completed, type_id: PaymentTypeEnum.Booking}
                     }
                 ]
@@ -309,11 +318,11 @@ export class AdminPaymentService {
                 throw new BadRequestException('Incorrect payment id!')
             }
 
-            if ( body.qty ) {
+            if ( !body.qty ) {
                 throw new BadRequestException('Quantity must be bigger than 0!')
             }
 
-            body.total_price = Math.round((drink.price * body.qty) * 100) / 100; 
+            // body.total_price = drink.price * body.qty; 
 
             const drink_payment = await DrinksPayment.create(
                 {
@@ -329,7 +338,7 @@ export class AdminPaymentService {
                 }
             )
 
-            if(drink_payment) {
+            if(!drink_payment) {
                 throw new BadRequestException("Can't create drink payment")
             }
 
@@ -338,16 +347,22 @@ export class AdminPaymentService {
             });
 
             // Sum up all the prices
-            payment.total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + payment.booking.price;
-            
-            payment.save({transaction});
+            const total_price = price_drinks.reduce((sum, drink) => sum + drink.total_price, 0) + payment.booking.price;
+            console.log(total_price)
+            await Payment.update(
+                {
+                    total_price
+                },
+                {
+                    where: {id: payment.id},
+                    transaction
+                }
+            )
 
             await transaction.commit();
-
             return {
                 data: {
                     drink_payment,
-                    payment
                 }
             };
 
@@ -386,11 +401,11 @@ export class AdminPaymentService {
                 throw new BadRequestException('Incorrect payment id!')
             }
 
-            if ( body.qty ) {
+            if ( !body.qty ) {
                 throw new BadRequestException('Quantity must be bigger than 0!')
             }
 
-            body.total_price = Math.round((drink.price * body.qty) * 100) / 100; 
+            // body.total_price = drink.price * body.qty 
 
             const drink_payment = await DrinksPayment.update(
                 {
@@ -404,12 +419,12 @@ export class AdminPaymentService {
                 }
             )
 
-            if(drink_payment) {
+            if(!drink_payment[0]) {
                 throw new BadRequestException("Can't update drink payment")
             }
 
             const price_drinks = await DrinksPayment.findAll({
-                where: { id }
+                where: { payment_id:  drinkPayment.payment_id}
             });
 
             // Sum up all the prices
@@ -473,7 +488,7 @@ export class AdminPaymentService {
             }
 
             const price_drinks = await DrinksPayment.findAll({
-                where: { id: { [Op.not]: id } }
+                where: { id: { [Op.not]: id}, payment_id: drinkPayment.payment_id  }
             });
 
             // Sum up all the prices
