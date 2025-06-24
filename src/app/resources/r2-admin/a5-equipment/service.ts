@@ -22,10 +22,20 @@ export class AdminEquipmentService {
 
 //   constructor(private fileService: FileService) {}
 
+  constructor(
+      private fileService: FileService
+  ) { };
+
+  private isValidBase64(str: string): boolean {
+      const base64Pattern = /^data:image\/(jpeg|png|gif|bmp|webp);base64,[a-zA-Z0-9+/]+={0,2}$/;
+      return base64Pattern.test(str);
+  }
+
   async getData() {
     try {
       const equipments = await Equipment.findAll({
-        attributes: ['id', 'name', 'image', 'sport_id', 'price'],
+        attributes: ['id', 'name', 'image', 'sport_id', 'price', 'updated_at'],
+        order: [['id', 'DESC']]
       });
       return equipments;
     } catch (error) {
@@ -41,6 +51,22 @@ export class AdminEquipmentService {
     try {
       transaction = await sequelize.transaction();
 
+      if (body?.image && body?.image !== "" && body.image !== null) {
+          if (this.isValidBase64(body.image)) {
+              const result = await this.fileService.uploadBase64Image('equipments', body.image);
+              if (result.error) {
+                  throw new BadRequestException(result.error);
+              }
+              // Replace base64 string with file URI from FileService
+              body.image = result.file?.uri;
+          } else {
+              await transaction.rollback();
+              throw new BadRequestException('រូបភាពត្រួវតែជា base64');
+          }
+      }
+      else{
+          body.image = 'static/sport-club/user/image.png';
+      }
       const newEquipment = await Equipment.create(body, {
         returning: true,
         transaction,
@@ -71,6 +97,23 @@ export class AdminEquipmentService {
       if (!equipment) {
         await transaction.rollback();
         throw new BadRequestException('Equipment not found!');
+      }
+
+      if (body?.image && body?.image !== "" && body.image !== null) {
+          if (this.isValidBase64(body.image)) {
+              const result = await this.fileService.uploadBase64Image('equipments', body.image);
+              if (result.error) {
+                  throw new BadRequestException(result.error);
+              }
+              // Replace base64 string with file URI from FileService
+              body.image = result.file?.uri;
+          } else {
+              await transaction.rollback();
+              throw new BadRequestException('រូបភាពត្រួវតែជា base64');
+          }
+      }
+      else{
+          body.image = 'static/sport-club/user/image.png';
       }
 
       const [affectedRows, [updatedEquipment]] = await Equipment.update(body, {

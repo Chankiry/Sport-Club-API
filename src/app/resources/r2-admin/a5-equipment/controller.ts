@@ -41,7 +41,7 @@ export class AdminEquipmentController {
         return await this._service.update(Number(id), body);
     }
 
-    @Delete()
+    @Delete(':id')
     async delete(
         @Param('id') id: number,
     ): Promise<any> {

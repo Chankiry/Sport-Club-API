@@ -11,9 +11,50 @@ import EquipmentPayment from 'src/models/equiment/equitment_payment.model';
 import Equipment from 'src/models/equiment/equitments.model';
 import Payment from 'src/models/payment/payment.model';
 import PaymentMethod from 'src/models/payment/payments_method.model';
+import { PaymentTypeEnum } from 'src/app/enums/user/paymentType.enum';
+import PaymentStatus from 'src/models/payment/payments_status.model';
 
 @Injectable()
 export class UserEquipmentService {
+
+  async getData(
+      user_id: number
+  ) { 
+    try {
+
+        const equiments = await Payment.findAll({
+            where: {type_id: PaymentTypeEnum.Equiment},
+            attributes: ['id', 'receipt_number', 'total_price', 'updated_at'],
+            include: [
+              {
+                model: EquipmentPayment,
+                where: {user_id},
+                required: true
+              },
+              {
+                model: PaymentStatus,
+                attributes: ['id', 'name', 'color']
+              },
+              {
+                model: PaymentMethod,
+                attributes: ['id', 'name']
+              }
+            ]
+        });
+
+        
+
+        return {
+            data: {
+              equiments
+            },
+        };
+    } catch (error) {
+        console.error(error);
+        throw new BadRequestException(error.message); // Handle errors gracefully
+    }
+  }
+
   async dataSetup() {
     try {
       const payments_method = await PaymentMethod.findAll({

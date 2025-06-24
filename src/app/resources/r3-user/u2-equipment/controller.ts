@@ -9,6 +9,13 @@ import User from 'src/models/user/user.model';
 export class UserEquipmentController {
   constructor(private readonly _service: UserEquipmentService) {}
 
+  @Get()
+  async getData(
+      @UserDecorator()    auth: User,
+  ): Promise<any> {
+      return await this._service.getData(auth.id);
+  }
+
   @Get('data-setup')
   async dataSetup() {
     return this._service.dataSetup();
