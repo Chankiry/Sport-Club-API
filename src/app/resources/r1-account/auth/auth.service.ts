@@ -17,6 +17,7 @@ import { UsersActiveEnum } from 'src/app/enums/user/active.enum';
 import { SignUpDto, UserDto } from './auth.dto';
 import sequelizeConfig from 'src/config/sequelize.config';
 import { UsersRoleEnum } from 'src/app/enums/user/type.enum';
+import Blacklist from 'src/models/user/blacklists.model';
 
 interface LoginPayload {
     username: string
@@ -35,6 +36,7 @@ export class AuthService {
                         { phone: body.username },
                         { email: body.username }
                     ],
+                    '$blacklist.id$': null,
                     is_active: UsersActiveEnum.Active
                 },
                 attributes: ['id', 'name', 'avatar', 'phone', 'email', 'password'],
@@ -42,7 +44,11 @@ export class AuthService {
                     {
                         model: UsersRole,
                         attributes: ['id', 'name']
-                    }
+                    },
+                    {
+                    model: Blacklist,
+                    required: false, // LEFT JOIN
+                    },
                 ]
             });
         } catch (error) {

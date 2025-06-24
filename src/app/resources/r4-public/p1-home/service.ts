@@ -29,11 +29,11 @@ export class PublicHomeService {
         groupedEquipments[sportName].push({
           id: item.id,
           name: item.name,
+          image: item.image,
           description: item.description,
           price: item.price,
           sport_id: item.sport_id,
-          sport_name: sportName,
-          image: `${IMAGE_URL}/images/${item.image}`,  
+          sport_name: sportName, 
         });
       }
 

@@ -7,9 +7,10 @@ import { Module } from '@nestjs/common';
 // ===========================================================================>> Custom Library
 import { AdminEquipmentController } from './controller';
 import { AdminEquipmentService }    from './service';
+import { FileService } from 'src/app/services/file.service';
 
 @Module({
     controllers: [AdminEquipmentController],
-    providers: [AdminEquipmentService]
+    providers: [AdminEquipmentService, FileService]
 })
 export class AdminEquipmentModule { }

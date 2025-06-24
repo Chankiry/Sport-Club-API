@@ -1,5 +1,5 @@
 // ================================================================>> Third Party Library
-import { Model, Column, Table, ForeignKey, BelongsTo, HasOne, DataType } from 'sequelize-typescript';
+import { Model, Column, Table, ForeignKey, BelongsTo, HasOne, DataType, HasMany } from 'sequelize-typescript';
 
 // ================================================================>> Custom Library
 import User from '../user/user.model'; 
@@ -9,6 +9,7 @@ import TimesType from '../pitch/times_type.model';
 import BookingStatus from './booking_status.model';
 import Payment from '../payment/payment.model';
 import TimesModel from '../pitch/times.model';
+import DrinksPayment from '../drink/drink_payments.model';
  
 
 @Table({ tableName: 'bookings', createdAt: 'created_at', updatedAt: 'updated_at', timestamps: true })
@@ -89,6 +90,9 @@ class Booking extends Model<Booking> {
 
     @BelongsTo(() => BookingStatus)
     booking_status: BookingStatus;
+
+    @HasMany(() => DrinksPayment)
+    drinks_payments: DrinksPayment[];
 
     // 1 to 0..1 relationship with Payment
     @HasOne(() => Payment)

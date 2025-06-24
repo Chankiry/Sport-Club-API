@@ -14,6 +14,7 @@ export class CreateEquippmentDto {
   @IsNotEmpty()
   name: string;
 
+  @IsOptional()
   @IsString()
   description: string;
 
